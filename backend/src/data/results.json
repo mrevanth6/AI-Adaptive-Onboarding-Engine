@@ -1,0 +1,1486 @@
+{
+  "Computer Systems Analysts": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Service Orientation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Troubleshooting",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ],
+  "Information Security Analysts": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ],
+  "Computer and Information Research Scientists": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Science",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Technology Design",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.38
+    }
+  ],
+  "Computer Network Support Specialists": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Troubleshooting",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Computer User Support Specialists": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Service Orientation",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Troubleshooting",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Computer Network Architects": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4.12
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Persuasion",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Negotiation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Service Orientation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Technology Design",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ],
+  "Database Administrators": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.12
+    }
+  ],
+  "Database Architects": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Service Orientation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Technology Design",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Data Warehousing Specialists": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.25
+    }
+  ],
+  "Network and Computer Systems Administrators": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Service Orientation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Operation and Control",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Equipment Maintenance",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Troubleshooting",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Repairing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Management of Personnel Resources",
+      "dataValue": 3
+    }
+  ],
+  "Computer Programmers": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 4.75
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ],
+  "Software Developers": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Technology Design",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ],
+  "Software Quality Assurance Analysts and Testers": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Web Developers": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 4.12
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Web Administrators": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Information Security Engineers": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4.12
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.38
+    }
+  ],
+  "Computer Systems Engineers/Architects": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Science",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Social Perceptiveness",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Service Orientation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Operations Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Quality Control Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Management of Personnel Resources",
+      "dataValue": 3
+    }
+  ],
+  "Operations Research Analysts": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 4.5
+    },
+    {
+      "skillName": "Science",
+      "dataValue": 3.25
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 4.12
+    },
+    {
+      "skillName": "Operations Analysis",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ],
+  "Statisticians": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 4.88
+    },
+    {
+      "skillName": "Science",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Programming",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3
+    }
+  ],
+  "Business Intelligence Analysts": [
+    {
+      "skillName": "Reading Comprehension",
+      "dataValue": 4
+    },
+    {
+      "skillName": "Active Listening",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Writing",
+      "dataValue": 3.75
+    },
+    {
+      "skillName": "Speaking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Mathematics",
+      "dataValue": 3.5
+    },
+    {
+      "skillName": "Critical Thinking",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Active Learning",
+      "dataValue": 3.88
+    },
+    {
+      "skillName": "Learning Strategies",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Monitoring",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Coordination",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Instructing",
+      "dataValue": 3
+    },
+    {
+      "skillName": "Complex Problem Solving",
+      "dataValue": 3.38
+    },
+    {
+      "skillName": "Judgment and Decision Making",
+      "dataValue": 3.62
+    },
+    {
+      "skillName": "Systems Analysis",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Systems Evaluation",
+      "dataValue": 3.12
+    },
+    {
+      "skillName": "Time Management",
+      "dataValue": 3.12
+    }
+  ]
+}
