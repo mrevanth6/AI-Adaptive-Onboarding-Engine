@@ -23,11 +23,11 @@ Frontend (React.js)
         ↓  
 Backend (Node.js / Flask API)  
         ↓  
-Resume Parsing (PDF/Text Extraction)  
+Resume Parsing  
         ↓  
-AI/NLP Processing (Skill Extraction)  
+AI/NLP Processing  
         ↓  
-Skill Comparison Engine  
+Skill Comparison  
         ↓  
 Roadmap Generator  
 
@@ -37,71 +37,50 @@ Roadmap Generator
 
 ### Frontend
 - React.js  
-- CSS / Tailwind CSS  
+- Tailwind CSS  
 - Axios  
 
 ### Backend
 - Node.js + Express  
-  *or*  
-- Python (Flask / FastAPI)  
 
 ### AI / NLP
-- OpenAI API (LLM for analysis & roadmap generation)  
-- spaCy / NLTK (Natural Language Processing)  
-- Embedding models (semantic similarity)  
+- OpenAI API  
+- spaCy / NLTK  
 
 ### Database
 - MongoDB / Firebase  
 
 ---
 
-## 🔄 Workflow
-1. User uploads resume  
-2. User enters job role or job description  
-3. Resume is parsed (PDF/Text extraction)  
-4. Skills are extracted using NLP  
-5. Extracted skills are compared with required skills  
-6. Skill gaps are identified  
-7. AI generates a personalized roadmap  
-
----
-
-## 🧠 Core Algorithms
-
-### Skill Extraction
-- Named Entity Recognition (NER)  
-- Keyword matching + semantic similarity  
-
-### Skill Gap Analysis
-- Compare extracted skills with job-required skills  
-- Identify missing and weak skills  
-
-### Adaptive Pathing Algorithm
-
-- Generates step-by-step learning sequence  
-
----
-
-## 📊 Datasets
-- Public job description datasets (Kaggle)  
-- Skill taxonomies (O*NET, ESCO)  
-- Sample resume datasets  
-
----
-
-## 📈 Metrics
-- Skill extraction accuracy  
-- Recommendation relevance score  
-- User satisfaction  
-- Processing time  
-
----
-
 ## 🚀 Installation & Setup
 
-### 1. Clone the Repository
-```bash
+### Clone the Repository
 git clone https://github.com/your-username/ai-resume-analyzer.git
 cd ai-resume-analyzer
+
+---
+
+## Backend Setup
+
+cd backend  
+npm install  
+
+Create .env file:
+PORT=5000  
+OPENAI_API_KEY=your_api_key_here  
+
+Run server:
+npm start  
+
+---
+
+## Frontend Setup
+
+cd frontend  
+npm install  
+npm start  
+
+---
+
 
 
