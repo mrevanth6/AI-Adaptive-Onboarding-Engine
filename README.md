@@ -104,12 +104,4 @@ Roadmap Generator
 git clone https://github.com/your-username/ai-resume-analyzer.git
 cd ai-resume-analyzer
 
-## Setup Frontend
-cd frontend
-npm install
-npm start
 
-## SetUP Backend
-cd backend
-npm install
-npm start
