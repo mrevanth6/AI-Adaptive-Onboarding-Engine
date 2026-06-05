@@ -3,10 +3,18 @@ require('dotenv').config();
 const cors = require('cors');
 const app = express();
 const uploadRoute = require('./routes/uploadRoute');
-
+app.use(cors());
 app.use(express.json());
 app.use('/api', uploadRoute);
-app.use(cors());
+app.use((err, req, res, next) => {
+
+
+    res.status(400).json({
+        success: false,
+        message: err.message
+    });
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

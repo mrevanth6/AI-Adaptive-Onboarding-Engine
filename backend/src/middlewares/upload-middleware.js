@@ -1,6 +1,4 @@
-const path = require('path');
 const multer = require('multer');
-
 // Allowed mime types/extensions
 const ALLOWED_MIMES = [
     'application/pdf',
@@ -8,18 +6,8 @@ const ALLOWED_MIMES = [
 ];
 const ALLOWED_EXT = ['.pdf', '.docx'];
 
-// Memory storage (recommended if you want to pass buffers to parser services)
+// Memory storage to store files in the RAM
 const memoryStorage = multer.memoryStorage();
-
-// Disk storage example (if you want to save files to disk)
-const diskStorage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, path.join(__dirname, '../../uploads')),
-    filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname).toLowerCase();
-        cb(null, `${Date.now()}-${Math.round(Math.random() * 1e6)}${ext}`);
-    }
-});
-
 // File filter: check mime and extension
 function fileFilter(req, file, cb) {
     const ext = path.extname(file.originalname).toLowerCase();
@@ -30,11 +18,9 @@ function fileFilter(req, file, cb) {
     }
 }
 
-// Export two preconfigured middlewares
 const uploadMemory = multer({
     storage: memoryStorage,
     fileFilter,
     limits: { fileSize: 10 * 1024 * 1024 } // 10 MB
 });
-
 module.exports = { uploadMemory };
