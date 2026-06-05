@@ -9,7 +9,7 @@ const resumeUpload = async (req, res) => {
 
         const text = await extractText(req.file.buffer, { mime: req.file.mimetype, filename: req.file.originalname });
         const jobDescription = req.body.jobDescription || '';
-        console.log(jobDescription);
+
         const cleanedText = cleanText(text);
         const skills = await extractSkills(cleanedText);
         const requiredSkillsList = await requiredSkills(jobDescription);
