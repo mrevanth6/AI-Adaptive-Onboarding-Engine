@@ -1,4 +1,5 @@
 const multer = require('multer');
+const path = require('path');
 // Allowed mime types/extensions
 const ALLOWED_MIMES = [
     'application/pdf',
@@ -10,6 +11,7 @@ const ALLOWED_EXT = ['.pdf', '.docx'];
 const memoryStorage = multer.memoryStorage();
 // File filter: check mime and extension
 function fileFilter(req, file, cb) {
+
     const ext = path.extname(file.originalname).toLowerCase();
     if (ALLOWED_MIMES.includes(file.mimetype) && ALLOWED_EXT.includes(ext)) {
         cb(null, true);

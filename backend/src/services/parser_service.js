@@ -31,5 +31,13 @@ async function extractText(input, opts = {}) {
 
     throw new TypeError('Unsupported file type: ' + ext);
 }
+function cleanText(text) {
+    return text
+        .replace(/\n/g, '\n')       // Convert escaped newlines
+        .replace(/\r/g, '')
+        .replace(/[ \t]+/g, ' ')    // Multiple spaces -> single space
+        .replace(/\n{2,}/g, '\n')   // Multiple newlines -> one newline
+        .trim();
+}
 
-module.exports = { extractText };
+module.exports = { extractText, cleanText };
