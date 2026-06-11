@@ -18,35 +18,48 @@ ${JSON.stringify(roleCompetencyMap, null, 2)}
 
 ANALYSIS RULES:
 - If candidate proficiency MEETS or EXCEEDS required proficiency → mark as "proficient" → DO NOT include in roadmap
-- If candidate proficiency is ONE level BELOW required → mark as "partial" → include as a short fast-track module
+- If candidate proficiency is ONE level BELOW required → mark as "partial" → include as a fast-track module
 - If skill is completely MISSING from candidate profile → mark as "missing" → include as a full module
 - Proficiency order: beginner < intermediate < advanced
 
-ROADMAP RULES:
-- Order topics by dependency (fundamentals before advanced)
-- "missing" skills get a full module (more hours, more resources)
-- "partial" skills get a fast-track module (fewer hours, focused on the gap only)
-- "proficient" skills are completely skipped
-- Each module must have a practical milestone — not just theory
-- Tailor the reason to the candidate's existing background. Be specific, not generic.
+ROADMAP RULES (IMPORTANT — REALISTIC PACING):
+- The candidate is a working professional going through onboarding. Assume they have 8-10 hours per week available for learning, NOT full-time.
+- Each roadmap item represents ONE topic, but its duration must be expressed in WEEKS based on estimated_hours, not assumed to be 1 week.
+- duration_weeks = ceil(estimated_hours / 9). For example, 20 hours → duration_weeks: 3, 8 hours → duration_weeks: 1.
+- Number topics sequentially using "module_number" (1, 2, 3...) — do NOT use "week" as the field name, since modules can span multiple weeks.
+- Include a "start_week" and "end_week" for each module, calculated sequentially based on previous modules' duration_weeks (module 1 starts at week 1).
+- "missing" skills get a full module (more hours, more resources, deeper coverage)
+- "partial" skills get a fast-track module (fewer hours, focused only on the specific gap, not the whole topic from scratch)
+- "proficient" skills are completely skipped — do not create modules for them
+- Order topics by dependency (prerequisites before advanced topics)
+- Each module must have ONE practical, verifiable milestone — not just theory
+- Tailor the "reason" field to the candidate's actual background — reference their specific projects, tools, or experience by name where relevant. Be specific, not generic.
+- Limit the roadmap to a MAXIMUM of 8 modules. If there are more gaps than that, prioritize the most critical/foundational ones and combine related smaller gaps into a single module.
 
-Return ONLY valid JSON, no explanation, no markdown:
+OUTPUT RULES:
+- Return ONLY valid JSON. No markdown, no code fences, no explanation text before or after.
+- Do NOT wrap the output in an extra "roadmap" key. Return "gap_analysis" and "roadmap" as top-level keys directly.
+
+Return exactly this structure:
 {
   "gap_analysis": {
-    "readiness_score": <0-100 based on how many required skills candidate already meets>,
-    "proficient": ["skill names the candidate already meets"],
-    "partial": ["skills candidate knows but below required level"],
+    "readiness_score": <0-100, percentage of required skills the candidate already meets at the required level>,
+    "proficient": ["skill names the candidate already meets or exceeds"],
+    "partial": ["skills candidate has but below required proficiency"],
     "missing": ["skills completely absent from candidate profile"]
   },
   "roadmap": [
     {
-      "week": <number>,
+      "module_number": <number>,
       "topic": "skill or topic name",
       "type": "full-module | fast-track",
-      "reason": "personalised explanation referencing their background",
+      "start_week": <number>,
+      "end_week": <number>,
+      "duration_weeks": <number>,
+      "reason": "personalised explanation referencing the candidate's actual background, projects, or tools by name",
       "estimated_hours": <number>,
-      "resources": ["resource 1", "resource 2"],
-      "milestone": "practical task to validate this skill"
+      "resources": ["resource 1", "resource 2", "resource 3"],
+      "milestone": "one specific, verifiable practical task to validate this skill"
     }
   ]
 }
@@ -86,207 +99,4 @@ async function generateRoadmap(candidateProfile, roleCompetencyMap) {
         throw new Error("Found JSON block but failed to parse it. Raw: " + cleaned.slice(0, 300));
     }
 }
-
-
-
-// // Normalize skill: lowercase + trim
-// function normalizeSkill(skill) {
-//     return (typeof skill === 'string' ? skill : '').toLowerCase().trim().replace(/\.js$/g, "")
-// }
-
-// // Normalize array of skills
-// function normalizeSkills(skills) {
-//     return Array.isArray(skills)
-//         ? skills.map(normalizeSkill).filter(s => s.length > 0)
-//         : [];
-// }
-
-// // Remove duplicates from skill array
-// function deduplicateSkills(skills) {
-//     return [...new Set(skills)];
-// }
-
-// // Map inputRole to O*NET role (defaults to "Software Developers")
-// function mapRole(inputRole) {
-//     return roleMap[inputRole] || 'Software Developers';
-// }
-
-// // Fetch core skills from O*NET data
-// function getCoreSkills(mappedRole) {
-//     const skills = onetData[mappedRole] || [];
-//     return skills.map(item => ({
-//         skill: normalizeSkill(item.skillName),
-//         value: item.dataValue
-//     }));
-// }
-
-// // Main analyzer function
-// async function analyzeResume(resumeSkills, jdSkills, inputRole) {
-//     try {
-//         // Normalize resume skills
-//         const normalizedResume = deduplicateSkills(normalizeSkills(resumeSkills || []));
-
-//         // Normalize technical skills (from JD)
-//         let technicalSkills = [];
-//         if (Array.isArray(jdSkills)) {
-//             technicalSkills = jdSkills
-//                 .map(item => ({
-//                     skill: normalizeSkill(typeof item === 'string' ? item : item.skill),
-//                     score: typeof item.score === 'number' ? item.score : 3
-//                 }))
-//                 .filter(item => item.skill.length > 0);
-//         }
-
-//         // Remove duplicate technical skills (keep highest score)
-//         const uniqueTechnical = {};
-//         technicalSkills.forEach(item => {
-//             if (!uniqueTechnical[item.skill] || item.score > uniqueTechnical[item.skill].score) {
-//                 uniqueTechnical[item.skill] = item;
-//             }
-//         });
-//         technicalSkills = Object.values(uniqueTechnical);
-
-//         // Map role and fetch core skills
-//         const mappedRole = mapRole(inputRole);
-//         let coreSkillsArray = getCoreSkills(mappedRole);
-
-//         // Remove duplicates from core skills (keep highest value)
-//         const uniqueCore = {};
-//         coreSkillsArray.forEach(item => {
-//             if (!uniqueCore[item.skill] || item.value > uniqueCore[item.skill].value) {
-//                 uniqueCore[item.skill] = item;
-//             }
-//         });
-//         coreSkillsArray = Object.values(uniqueCore);
-
-//         // Find missing skills
-//         const missingTechnical = technicalSkills
-//             .filter(t => !normalizedResume.includes(t.skill))
-//             .sort((a, b) => b.score - a.score);
-
-//         const missingCore = coreSkillsArray
-//             .filter(c => !normalizedResume.includes(c.skill))
-//             .sort((a, b) => b.value - a.value);
-
-//         // Generate roadmap using LLM
-//         const roadmap = await generateRoadmap(missingTechnical, missingCore, normalizedResume, inputRole);
-
-//         return {
-//             role: inputRole,
-//             mappedRole,
-//             missingSkills: {
-//                 technical: missingTechnical,
-//                 core: missingCore
-//             },
-//             roadmap
-//         };
-//     } catch (error) {
-//         console.error('Error analyzing resume:', error);
-//         throw error;
-//     }
-// }
-
-// // Generate learning roadmap using Gemini
-// async function generateRoadmap(missingTechnical, missingCore, knownSkills, inputRole) {
-//     try {
-//         const model = genAI.getGenerativeModel({
-//             model: "gemini-3-flash-preview"
-//         });
-
-//         // Format skills for prompt
-//         const technicalStr = missingTechnical
-//             .slice(0, 10) // Top 10 to avoid token overload
-//             .map(t => `${t.skill} (score: ${t.score}/5)`)
-//             .join(', ');
-
-//         const coreStr = missingCore
-//             .slice(0, 10) // Top 10 to avoid token overload
-//             .map(c => `${c.skill} (value: ${c.value}/5)`)
-//             .join(', ');
-
-//         const knownStr = knownSkills.slice(0, 20).join(', ');
-
-//         const prompt = `You are an expert career mentor designing a personalized, job-ready learning roadmap.
-
-// Context:
-// - Target Role: ${inputRole}
-// - Known skills: ${knownStr || 'none'}
-// - Missing core skills (with importance): ${coreStr || 'none'}
-// - Missing technical skills (with scores): ${technicalStr || 'none'}
-
-// Objective:
-// Generate a structured learning roadmap tailored specifically to the Target Role.
-
-// Instructions:
-
-// 1. Generate 8-10 steps ONLY.
-
-// 2. Adapt the roadmap structure based on the Target Role:
-//    - Identify the natural learning flow for that role
-//    - Example:
-//      • Frontend → UI → JS → Frameworks → Projects
-//      • Backend → APIs → DB → Scaling
-//      • Data roles → Python → Analysis → ML → Projects
-//      • Full Stack → Backend → DB → Frontend → Integration
-
-// 3. Each step MUST:
-//    - Start with a strong action verb (Learn, Build, Implement, Design, Develop, Optimize)
-//    - Focus on ONLY ONE main concept
-//    - Be practical and job-oriented
-//    - Clearly relate to the Target Role
-
-// 4. Strict Rules:
-//    - Do NOT include skills already in Known skills
-//    - ONLY use skills from Missing core and Missing technical
-//    - Do NOT introduce new or unrelated skills
-//    - Do NOT include generic soft skills (e.g., communication, reading, listening)
-//    - Avoid vague steps like "improve understanding"
-
-// 5. Learning Progression:
-//    - Start with core fundamentals (relevant ones only, e.g., programming, problem solving)
-//    - Then move to domain-specific technical skills
-//    - Then tools/frameworks
-//    - Then integration (if applicable)
-//    - End with:
-//      • One real-world project step
-//      • One optimization or advanced improvement step
-
-// 6. Ensure:
-//    - Logical beginner → advanced progression
-//    - Clean separation of steps
-//    - Real-world applicability
-
-// Return ONLY a valid JSON array of strings.
-// No explanation. No extra text.
-
-// Example (Frontend Developer):
-// [
-//   "Learn JavaScript fundamentals and DOM manipulation",
-//   "Build responsive UI using modern CSS techniques",
-//   "Develop interactive interfaces using React",
-//   "Manage state effectively in React applications",
-//   "Integrate frontend with backend APIs",
-//   "Build a real-world frontend project",
-//   "Optimize performance and improve user experience"
-// ]`;
-
-//         const result = await model.generateContent(prompt);
-//         const responseText = result.response.text();
-
-//         // Extract JSON array from response
-//         const jsonMatch = responseText.match(/\[[\s\S]*\]/);
-//         if (jsonMatch) {
-//             const roadmapArray = JSON.parse(jsonMatch[0]);
-//             return Array.isArray(roadmapArray) ? roadmapArray : [];
-//         }
-//         return [];
-
-//     } catch (error) {
-//         console.error('Error generating roadmap:', error);
-//         return [];
-//     }
-
-// }
-
-// module.exports = { analyzeResume, normalizeSkill, normalizeSkills, mapRole, getCoreSkills };
 module.exports = { generateRoadmap };

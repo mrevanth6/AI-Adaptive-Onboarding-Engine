@@ -9,15 +9,6 @@ function ResumeAnalyser() {
   const [jobDescription, setJobDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const preProcessData = (resumeSkills, requiredSkills) => {
-    // Pre Proccess the data that we got from the First API and then send it to the second API
-    
-    const jdSkills = Object.keys(requiredSkills).filter(
-        key => key !== "job_role"
-    );
-    const inputRole=requiredSkills.job_role;
-    return { resumeSkills, jdSkills, inputRole };
-  }
   const uploadResume = async () => {
     // Validation
     if (!resumeFile) {
@@ -47,19 +38,7 @@ function ResumeAnalyser() {
           }
         }
       );
-     
-      const processedData = preProcessData(res.data.skills, res.data.requiredSkills);
-      const roadMapRes=await axios.post(
-        "http://localhost:3000/api/analyze",
-        processedData,
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
- 
-      
+      const roadMap = res.data;
       // Navigate to Learning Roadmap with the backend data
       navigate("/learning-roadmap", { state: { roadmapData: roadMapRes.data, resumeData: res.data } });
     } catch (error) {

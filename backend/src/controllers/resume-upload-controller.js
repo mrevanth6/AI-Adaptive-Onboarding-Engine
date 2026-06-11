@@ -17,7 +17,7 @@ const resumeUpload = async (req, res) => {
 
         const roadmap = await generateRoadmap(extractedSkills, JDSkills);
         console.log(roadmap);
-        res.status(200).json({ roadmap });
+        res.status(200).json(roadmap);
     } catch (err) {
         console.error('Error processing file:', err);
         res.status(err.status || 500).json({ error: err.message });
