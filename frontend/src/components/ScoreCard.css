@@ -1,0 +1,15 @@
+.score-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.score-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+}
+
+.progress-wrapper {
+    width: 180px;
+    margin: 20px auto;
+}

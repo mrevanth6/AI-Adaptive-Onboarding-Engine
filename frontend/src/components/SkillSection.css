@@ -1,0 +1,75 @@
+.skill-section {
+    border-radius: 12px;
+    padding: 16px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    position: relative;
+}
+
+.skill-section:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+}
+
+
+.skill-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+}
+
+.skill-count-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.skill-count-badge.green {
+    background: #10B981;
+}
+
+.skill-count-badge.yellow {
+    background: #F59E0B;
+}
+
+.skill-count-badge.red {
+    background: #EF4444;
+}
+
+.skill-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.skill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+    margin-bottom: 12px;
+    align-content: flex-start;
+
+
+}
+
+.skill-footer {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6B7280;
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px solid #E5E7EB;
+}

@@ -1,15 +1,16 @@
-import ResumeAnalyzer from "./components/ResumeAnalyzer";
+import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LearningRoadmap from "./components/LearningRoadmap";
+import LearningRoadMap from "./pages/LearningRoadMap";
+
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div >
         <Routes>
-          <Route path="/" element={<ResumeAnalyzer />} />
-          <Route path="/learning-roadmap" element={<LearningRoadmap />} />
+          {/* <Route path="/" element={<ResumeAnalyzer />} /> */}
+          <Route path="/" element={<LearningRoadMap />} />
         </Routes>
       </div>
     </Router>

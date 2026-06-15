@@ -1,4 +1,4 @@
-/* ===== Container & Layout ===== */
+/* 
 .ra-container {
   min-height: 100vh;
   display: flex;
@@ -18,10 +18,10 @@
   padding: 60px 50px;
   box-shadow: none;
   border-left: 4px solid #000000;
-}
+} */
 
 /* ===== Header ===== */
-.ra-header {
+/* .ra-header {
   margin-bottom: 48px;
   position: relative;
   padding-bottom: 24px;
@@ -42,10 +42,10 @@
   color: #666666;
   line-height: 1.6;
   font-weight: 400;
-}
+} */
 
 /* ===== Section Styling ===== */
-.ra-section {
+/* .ra-section {
   margin-bottom: 32px;
 }
 
@@ -57,10 +57,10 @@
   color: #000000;
   text-transform: uppercase;
   letter-spacing: 1px;
-}
+} */
 
 /* ===== File Upload Area ===== */
-.ra-upload-area {
+/* .ra-upload-area {
   position: relative;
   border: 1px solid #000000;
   border-radius: 0;
@@ -130,10 +130,10 @@
   color: #999999;
   margin-top: 6px;
   transition: color 0.3s ease;
-}
+} */
 
 /* ===== Textarea ===== */
-.ra-textarea {
+/* .ra-textarea {
   width: 100%;
   min-height: 140px;
   padding: 16px;
@@ -155,16 +155,16 @@
 .ra-textarea:hover {
   border-color: #000000;
   background-color: #f5f5f5;
-}
+} */
 
-.ra-textarea:focus {
+/* .ra-textarea:focus {
   outline: none;
   border-color: #000000;
   background-color: #ffffff;
-}
+} */
 
 /* ===== Error Message ===== */
-.ra-error {
+/* .ra-error {
   margin-bottom: 20px;
   padding: 14px 16px;
   background-color: #ffffff;
@@ -173,9 +173,9 @@
   font-size: 14px;
   color: #000000;
   animation: slideInDown 0.3s ease;
-}
+} */
 
-@keyframes slideInDown {
+/* @keyframes slideInDown {
   from {
     opacity: 0;
     transform: translateY(-8px);
@@ -184,10 +184,10 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
 
 /* ===== Action Button ===== */
-.ra-actions {
+/* .ra-actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 40px;
@@ -241,10 +241,10 @@
 .ra-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
+} */
 
 /* ===== Loading Spinner ===== */
-.ra-spinner {
+/* .ra-spinner {
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -252,97 +252,81 @@
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
+} */
+
+.resume-analyzer {
+
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.resume-card {
+  width: min(90vw, 900px);
+  max-width: 700px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-/* ===== Responsive Design ===== */
-@media (max-width: 768px) {
-  .ra-container {
-    padding: 16px;
-  }
-
-  .ra-card {
-    padding: 40px 28px;
-  }
-
-  .ra-title {
-    font-size: 28px;
-  }
-
-  .ra-subtitle {
-    font-size: 14px;
-  }
-
-  .ra-header {
-    margin-bottom: 36px;
-    padding-bottom: 18px;
-  }
-
-  .ra-upload-area {
-    padding: 28px 20px;
-  }
-
-  .ra-upload-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .ra-upload-text {
-    font-size: 14px;
-  }
-
-  .ra-actions {
-    justify-content: center;
-  }
-
-  .ra-button {
-    width: 100%;
-  }
+.resume-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #000000;
 }
 
-@media (max-width: 480px) {
-  .ra-card {
-    padding: 32px 20px;
-    border-left: 3px solid #000000;
-  }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
 
-  .ra-header {
-    margin-bottom: 28px;
-    padding-bottom: 16px;
-  }
+.input-group label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
 
-  .ra-title {
-    font-size: 24px;
-  }
+.input-group input[type="file"] {
+  padding: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-  .ra-subtitle {
-    font-size: 13px;
-  }
+textarea {
+  width: 100%;
+  min-height: 220px;
+  resize: none;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+}
 
-  .ra-section {
-    margin-bottom: 24px;
-  }
+.submit-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 25px;
+  background: #0d0d0e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  .ra-upload-area {
-    padding: 24px 16px;
-  }
+.submit-btn:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+}
 
-  .ra-label {
-    font-size: 12px;
-  }
-
-  .ra-textarea {
-    min-height: 120px;
-    font-size: 14px;
-  }
-
-  .ra-button {
-    padding: 14px 32px;
-    font-size: 12px;
-  }
+.submit-btn:hover {
+  background: #323333;
 }
