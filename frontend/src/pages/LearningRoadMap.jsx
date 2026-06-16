@@ -2,6 +2,7 @@ import React from 'react';
 import ScoreCard from '../components/ScoreCard';
 import SkillAnalysis from '../components/SkillAnalysis';
 import './LearningRoadMap.css';
+import RoadMapTimeline from '../components/RoadMapTimeline';
 function LearningRoadmap() {
     return (
         <div className="learning-roadmap">
@@ -15,7 +16,7 @@ function LearningRoadmap() {
                     <SkillAnalysis />
                 </div>
             </div>
-
+            <RoadMapTimeline />
         </div >
     );
 }
