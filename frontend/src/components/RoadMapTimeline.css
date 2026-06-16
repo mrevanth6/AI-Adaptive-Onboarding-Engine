@@ -183,3 +183,17 @@
     padding: 8px;
     border-radius: 8px;
 }
+
+.icon-module {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+    margin-top: 2px;
+}
+
+.icon-map {
+    height: 32px;
+    width: 32px;
+    margin-right: 4px;
+    margin-top: 2px;
+}

@@ -28,6 +28,7 @@ function RoadMapCard({ module }) {
                             <p className="module-reason-para p-font">{module.reason}</p>
                         </div>
                     </div>
+
                     <div className="module-milestone">
                         <div className="milestone-box">
                             <h4 className="milestone-heading">Milestone</h4>

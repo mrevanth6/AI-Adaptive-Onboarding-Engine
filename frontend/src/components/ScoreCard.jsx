@@ -1,11 +1,11 @@
 import roadmap from '../assets/roadmap.json';
 import React from 'react';
 const { useState, useEffect } = React;
+import { TrendingUp } from "lucide-react";
 import './ScoreCard.css';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-function ScoreCard() {
-    const score = roadmap.gap_analysis.readiness_score;
+function ScoreCard({ score }) {
     const getColor = (score) => {
         if (score < 40) return "#EF4444";
         if (score < 70) return "#F59E0B";
@@ -24,7 +24,14 @@ function ScoreCard() {
     }, [score]);
     return (
         <div className="score-card">
-            <h3>Readiness Score</h3>
+            <div className="header-wrapper">
+                <div className="icon-container">
+                    <TrendingUp size={32} className="score-icon" />
+                </div>
+
+                <h3>Readiness Score</h3>
+            </div >
+
 
             <div className="progress-wrapper">
                 <CircularProgressbar
@@ -46,6 +53,7 @@ function ScoreCard() {
             </p>
 
         </div>
+
     );
 }
 

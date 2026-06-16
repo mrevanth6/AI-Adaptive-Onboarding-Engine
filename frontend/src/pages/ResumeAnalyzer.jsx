@@ -4,6 +4,7 @@ import axios from 'axios';
 import './resume-analyzer.css';
 
 function ResumeAnalyser() {
+  const navigate = useNavigate();
   const [resume, setResume] = useState();
   const [jobDescription, setjobDescription] = useState("");
   const [disable, setDisable] = useState(false);
@@ -14,27 +15,45 @@ function ResumeAnalyser() {
     formData.append('file', resume);
     formData.append('jobDescription', jobDescription);
     console.log(formData);
-    // console.log(formData);
-    // const response = await axios.post(
-    //   'http://localhost:3000/api/upload',
-    //   formData,
-    //   {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data'
-    //     }
-    //   }
-    // );
-    // console.log(response);
+    console.log(formData);
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        const data = response.data;
+
+        localStorage.setItem('resumeData', JSON.stringify(data));
+        navigate('/roadmap', { state: data });
+      } else {
+        alert("Error uploading resume. Please try again.");
+
+      }
+      setDisable(false);
+    }
+    catch (error) {
+
+      alert("An error occurred while uploading the resume. Please try again.");
+      setDisable(false);
+    }
+
   }
   const handleResume = (e) => {
     const file = e.target.files[0];
     setResume(file);
-    console.log(file);
+
   }
   const handleJobDescription = (e) => {
     const value = e.target.value;
     setjobDescription(value);
-    console.log(value);
+
   }
   return (
     <>
