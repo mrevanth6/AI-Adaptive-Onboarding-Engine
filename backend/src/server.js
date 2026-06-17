@@ -3,9 +3,15 @@ require('dotenv').config();
 const cors = require('cors');
 const app = express();
 const uploadRoute = require('./routes/uploadRoute');
+const authRoutes = require('./routes/authRoutes');
+const connectTODB = require('./database/data_base');
+
+connectTODB();
+
 app.use(cors());
 app.use(express.json());
 app.use('/api', uploadRoute);
+app.use('/api/auth', authRoutes);
 app.use((err, req, res, next) => {
 
 
