@@ -1,21 +1,11 @@
-.login-page {
+.signup-page {
     background-color: white;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-/* #learning-illustration {
-    height: 75%;
-    width: 75%;
-    object-fit: cover;
-    position: relative;
-    top: 100px;
-    left: 20px;
-
-} */
-
-.login-page-image {
+.signup-page-image {
 
     /* background-color: #f5f5f5;
     height: 100vh;
@@ -41,7 +31,7 @@
     background-size: 65%;
 }
 
-.login-page-image h1 {
+.signup-page-image h1 {
     position: absolute;
     top: 80px;
     left: 40px;
@@ -50,7 +40,7 @@
     color: #1F2937;
 }
 
-.login-page-image p {
+.signup-page-image p {
     position: absolute;
     top: 140px;
     left: 40px;
@@ -59,8 +49,7 @@
     font-size: 16px;
 }
 
-
-.login-container {
+.signup-container {
     height: 100vh;
     width: fit-content;
     margin: 40px 0 0 60px;
@@ -71,15 +60,15 @@
     gap: 20px;
 }
 
-.login-container-header {
+.signup-container-header {
     padding: 10px;
 }
 
-.login-container-header h1 {
+.signup-container-header h2 {
     margin-bottom: 10px;
 }
 
-.login-form {
+.signup-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -111,6 +100,15 @@
     position: relative;
 }
 
+.password-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    cursor: pointer;
+}
+
 .input-icon {
     position: absolute;
     left: 14px;
@@ -140,7 +138,7 @@
     box-shadow: 0 0 0 3px rgba(108, 99, 255, .15);
 }
 
-.login-btn {
+.signup-btn {
     border: none;
 
     padding: 14px;
@@ -160,21 +158,8 @@
     transition: .3s;
 }
 
-.login-btn:hover {
+.signup-btn:hover {
     background: #5A52E0;
-}
-
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    font-size: 14px;
-}
-
-.form-options a {
-    color: #6C63FF;
-    text-decoration: none;
 }
 
 .social-login {
@@ -261,22 +246,22 @@
 
 @media (max-width: 992px) {
 
-    .login-page {
+    .signup-page {
         grid-template-columns: 1fr;
     }
 
-    .login-page-image {
+    .signup-page-image {
         height: 300px;
         background-size: 50%;
     }
 
-    .login-container {
+    .signup-container {
         width: 100%;
         margin: 20px auto;
         align-items: center;
     }
 
-    .login-form {
+    .signup-form {
         width: 90%;
         max-width: 500px;
     }
@@ -285,15 +270,15 @@
 
 @media (max-width: 768px) {
 
-    .login-page {
+    .signup-page {
         display: block;
     }
 
-    .login-page-image {
+    .signup-page-image {
         display: none;
     }
 
-    .login-container {
+    .signup-container {
         width: 100%;
         height: auto;
         margin: 0;
@@ -301,21 +286,17 @@
         align-items: stretch;
     }
 
-    .login-form {
+    .signup-form {
         width: 100%;
         padding: 0;
     }
 
-    .login-container-header {
+    .signup-container-header {
         padding: 0;
     }
 
-    .login-container-header h1 {
+    .signup -container-header h1 {
         font-size: 2rem;
-    }
-
-    .form-options {
-        font-size: 13px;
     }
 
     .social-login {
