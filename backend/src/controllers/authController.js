@@ -32,7 +32,7 @@ const loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (err) {
         console.error(err);
@@ -42,21 +42,25 @@ const loginUser = async (req, res) => {
 const googleLogin = async (req, res) => {
     try {
         const { access_token } = req.body;
-        const ticket = await client.verifyIdToken({
-            idToken: access_token,
-            audience: process.env.GOOGLE_CLIENT_ID,
+        //Fetch the user information from Google using the access token
+        const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+            headers: { Authorization: `Bearer ${access_token}` }
         });
-        const payload = ticket.getPayload();
-        const { sub: googleId, email } = payload;
+        if (!response.ok) {
+            return res.status(400).json({ message: 'Invalid access token' });
+        }
+        const googleuser = await response.json();
+        const { id: googleId, email } = googleuser;
         let user = await User.findOne({ email });
+
         if (!user) {
             user = await User.create({ email, googleId });
         }
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
         res.status(200).json({ token });
 
     } catch (e) {
-        console.error(err);
+        console.error(e);
         res.status(500).json({ message: 'Server error' });
     }
 }
