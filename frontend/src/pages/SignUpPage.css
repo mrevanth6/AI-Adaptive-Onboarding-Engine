@@ -25,10 +25,10 @@
 
     padding: 40px;
 
-    background-image: url('../assets/learning_illustration.svg');
+    background-image: url('../assets/rocket_illustration.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 65%;
+    background-size: 75%;
 }
 
 .signup-page-image h1 {

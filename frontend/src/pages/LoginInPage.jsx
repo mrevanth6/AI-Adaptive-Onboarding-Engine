@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 function LoginInPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -45,8 +46,29 @@ function LoginInPage() {
             toast.error(error.response?.data?.message || "An error occurred during login. Please try again.");
         }
     }
+    // const googleLoginOnSuccess = async (credentialResponse) => {
+    //     try {
+    //         const response = await axios.post("http://localhost:3000/api/auth/google-login",
+    //             { access_token: credentialResponse.credential });
+    //         if (response.status === 200) {
+    //             const { token } = response.data;
+    //             localStorage.setItem("token", token);
+    //             toast.success("Login successful!");
+    //             navigate("/analyzer");
+    //         }
+    //     }
+    //     catch (error) {
+    //         toast.error(error.response?.data?.message || "An error occurred during login. Please try again.");
+    //     }
+    // }
+    // const googleLoginOnError = () => {
+    //     toast.error("Google login failed. Please try again.");
+    // }
+
     const signInWithGoogle = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
+
+            console.log(tokenResponse.access_token);
             try {
                 const response = await axios.post("http://localhost:3000/api/auth/google-login", { access_token: tokenResponse.access_token });
                 if (response.status === 200) {
@@ -58,6 +80,7 @@ function LoginInPage() {
             } catch (error) {
                 toast.error(error.response?.data?.message || "An error occurred during login. Please try again.");
             }
+
         },
         onError: (error) => {
             toast.error("Google login failed. Please try again.");
@@ -105,7 +128,7 @@ function LoginInPage() {
                             <Lock size={18} className="input-icon" />
 
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
