@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         const newUser = await User.create({ email, password: hashedPassword });
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
-        console.error(err);
+        console.log(err);
         res.status(500).json({ message: 'Server error' });
     }
 }
