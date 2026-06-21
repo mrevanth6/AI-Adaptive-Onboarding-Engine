@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         const newUser = await User.create({ email, password: hashedPassword });
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
-        console.error(err);
+
         res.status(500).json({ message: 'Server error' });
     }
 }
@@ -35,7 +35,7 @@ const loginUser = async (req, res) => {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (err) {
-        console.error(err);
+
         res.status(500).json({ message: 'Server error' });
     }
 }
@@ -43,7 +43,7 @@ const googleLogin = async (req, res) => {
     try {
         const { access_token } = req.body;
         //Fetch the user information from Google using the access token
-        const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+        const response = await fetch(process.env.GOOGLE_USER_INFO_URL, {
             headers: { Authorization: `Bearer ${access_token}` }
         });
         if (!response.ok) {
@@ -60,7 +60,7 @@ const googleLogin = async (req, res) => {
         res.status(200).json({ token });
 
     } catch (e) {
-        console.error(e);
+
         res.status(500).json({ message: 'Server error' });
     }
 }
