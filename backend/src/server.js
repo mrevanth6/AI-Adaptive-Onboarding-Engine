@@ -7,7 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const connectTODB = require('./database/data_base');
 
 connectTODB();
-
+c
 app.use(cors());
 app.use(express.json());
 app.use('/api', uploadRoute);
@@ -26,5 +26,5 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-
+    console.log(`Server is running on port ${PORT}`);
 });
