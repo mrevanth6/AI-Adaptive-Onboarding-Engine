@@ -7,7 +7,6 @@ const authRoutes = require('./routes/authRoutes');
 const connectTODB = require('./database/data_base');
 
 connectTODB();
-c
 app.use(cors());
 app.use(express.json());
 app.use('/api', uploadRoute);
