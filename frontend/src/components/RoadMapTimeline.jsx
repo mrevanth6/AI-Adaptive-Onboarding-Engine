@@ -5,8 +5,6 @@ import "./RoadMapTimeline.css";
 import { BookOpen, Clock3, Map, Calendar1Icon } from "lucide-react";
 
 function RoadMapTimeline({ modules }) {
-
-    // const { roadmap: modules } = roadmap;
     const totalHours = modules.reduce((total, module) => total + module.estimatedHours, 0);
     const totalWeeks = modules[modules.length - 1].end_week;
     return (

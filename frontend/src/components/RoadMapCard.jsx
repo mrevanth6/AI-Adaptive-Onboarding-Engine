@@ -43,57 +43,7 @@ function RoadMapCard({ module }) {
             </div>
         </div>
 
-        // <div className={`roadmap-card-wrapper ${isLast ? 'is-last' : ''}`}>
-        //     <div className="roadmap-card">
-        //         <div className="card-header">
-        //             <div className={`type-badge ${getTypeClass(module.type)}`}>
-        //                 {getTypeLabel(module.type)}
-        //             </div>
-        //             <div className="card-meta">
-        //                 <span className="hours">⏱ {module.estimated_hours} Hours</span>
-        //             </div>
-        //         </div>
-        //         <h3 className='card-tile'>{module.title}</h3>
-        //         <p className="class-description">{module.description}</p>
-        //         <button
-        //             className="view-details-btn"
-        //             onClick={() => setIsExpanded(!isExpanded)}
-        //         >
-        //             {isExpanded ? 'Hide Details' : 'View Details'}
-        //         </button>
-        //         {isExpanded && (
-        //             <div className="expanded-content">
-        //                 <div className="milestone-section">
-        //                     <h4>Milestone</h4>
-        //                     <p>{module.milestone}</p>
-        //                 </div>
-        //                 {module.resources && module.resources.length > 0 && (
-        //                     <div className="resources-section">
-        //                         <h4>Resources</h4>
-        //                         <ul className="resources-list">
-        //                             {module.resources.map((resource, idx) => (
-        //                                 <li key={idx}>
-        //                                     <a
-        //                                         href={resource.url}
-        //                                         target="_blank"
-        //                                         rel="noopener noreferrer"
-        //                                         className="resource-link"
-        //                                     >
-        //                                         {resource.title}
-        //                                     </a>
-        //                                     <span className="resource-type">
-        //                                         {resource.type}
-        //                                     </span>
-        //                                 </li>
-        //                             ))}
-        //                         </ul>
-        //                     </div>
-        //                 )}
-        //             </div>
-        //         )}
-        //     </div>
-        //     {!isLast && <div className="connecting-line"></div>}
-        // </div>
+
 
     );
 }

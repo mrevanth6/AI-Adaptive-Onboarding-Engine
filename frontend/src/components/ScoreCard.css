@@ -41,3 +41,18 @@
     font-weight: 600;
     margin: 0;
 }
+
+@media (max-width: 768px) {
+    .score-card {
+
+        margin: 10px 10px 0px 10px;
+    }
+
+    .progress-wrapper {
+        width: 150px;
+    }
+
+    .header-wrapper {
+        gap: 10px;
+    }
+}

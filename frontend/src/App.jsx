@@ -1,10 +1,10 @@
 import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LearningRoadMap from "./pages/LearningRoadMap";
-import ResumeAnalyser from "./pages/ResumeAnalyzer";
-import LoginInPage from "./pages/LoginInPage";
-import SignUpPage from "./pages/SignUpPage";
+import LearningRoadMap from "./pages/LearningRoadMap.jsx";
+import ResumeAnalyser from "./pages/ResumeAnalyzer.jsx";
+import LoginInPage from "./pages/LoginInPage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 function App() {

@@ -10,6 +10,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import "./SignUpPage.css";
+const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL);
 function SignUpPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -40,7 +42,8 @@ function SignUpPage() {
         if (isEmailValid && isPasswordMatch) {
             // Proceed with sign-up logic
             try {
-                const response = await axios.post("http://localhost:3000/api/auth/register", { email, password });
+                console.log(API_URL);
+                const response = await axios.post(`${API_URL}/api/auth/register`, { email, password });
                 if (response.status === 201) {
                     toast.success("Account created successfully! Please log in.");
 
@@ -48,6 +51,7 @@ function SignUpPage() {
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message || "An error occurred during registration. Please try again.");
+                console.error(error);
 
             }
         }
@@ -56,7 +60,7 @@ function SignUpPage() {
     const signInWithGoogle = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             try {
-                const response = await axios.post("http://localhost:3000/api/auth/google-login", { access_token: tokenResponse.access_token });
+                const response = await axios.post(`${API_URL}/api/auth/google-login`, { access_token: tokenResponse.access_token });
                 if (response.status === 200) {
                     const { token } = response.data;
                     localStorage.setItem("token", token);

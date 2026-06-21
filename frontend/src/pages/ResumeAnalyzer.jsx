@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './resume-analyzer.css';
-
+const API_URL = import.meta.env.VITE_API_URL;
 function ResumeAnalyser() {
   const navigate = useNavigate();
   const [resume, setResume] = useState();
@@ -18,7 +18,7 @@ function ResumeAnalyser() {
     console.log(formData);
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/upload',
+        "https://ai-adaptive-onboarding-engine-d0qy.onrender.com/api/upload",
         formData,
         {
           headers: {

@@ -73,3 +73,11 @@
     padding-top: 10px;
     border-top: 1px solid #E5E7EB;
 }
+
+@media (max-width: 768px) {
+    .skill-section {
+        margin: 0px 10px 12px 10px;
+        padding: 14px;
+        background-color: white;
+    }
+}

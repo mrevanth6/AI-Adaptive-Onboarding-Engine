@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from "@react-oauth/google";
+const API_URL = import.meta.env.VITE_API_URL;
 function LoginInPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ function LoginInPage() {
             return;
         }
         try {
-            const response = await axios.post("http://localhost:3000/api/auth/login", { email, password });
+            const response = await axios.post("https://ai-adaptive-onboarding-engine-d0qy.onrender.com/api/auth/login", { email, password });
             if (response.status === 200) {
                 const { token } = response.data;
                 localStorage.setItem("token", token);
@@ -48,7 +49,7 @@ function LoginInPage() {
     }
     // const googleLoginOnSuccess = async (credentialResponse) => {
     //     try {
-    //         const response = await axios.post("http://localhost:3000/api/auth/google-login",
+    //         const response = await axios.post(`${API_URL}/auth/google-login`,
     //             { access_token: credentialResponse.credential });
     //         if (response.status === 200) {
     //             const { token } = response.data;
@@ -70,7 +71,8 @@ function LoginInPage() {
 
             console.log(tokenResponse.access_token);
             try {
-                const response = await axios.post("http://localhost:3000/api/auth/google-login", { access_token: tokenResponse.access_token });
+                const response = await axios.post("https://ai-adaptive-onboarding-engine-d0qy.onrender.com/api/auth/google-login", { access_token: tokenResponse.access_token });
+                console.log(response);
                 if (response.status === 200) {
                     const { token } = response.data;
                     localStorage.setItem("token", token);

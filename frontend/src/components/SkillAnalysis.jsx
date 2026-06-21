@@ -2,7 +2,6 @@ import "./SkillAnalysis.css";
 import SkillSection from "./SkillSection.jsx";
 import roadmap from "../assets/roadmap.json";
 function SkillAnalysis({ gap_analysis }) {
-    // const { gap_analysis } = roadmap;
     return (
         <div className="skill-analysis">
             <div className='skill-sections'>

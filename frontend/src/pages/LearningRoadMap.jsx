@@ -18,9 +18,11 @@ function LearningRoadmap() {
                 <div className="skills-card">
                     <ScoreCard score={resumeData.gap_analysis.readiness_score} />
                     <SkillAnalysis gap_analysis={resumeData.gap_analysis} />
+
                 </div>
             </div>
             <RoadMapTimeline modules={resumeData.roadmap} />
+
         </div >
     );
 }

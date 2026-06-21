@@ -5,6 +5,7 @@ import { TrendingUp } from "lucide-react";
 import './ScoreCard.css';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+
 function ScoreCard({ score }) {
     const getColor = (score) => {
         if (score < 40) return "#EF4444";
