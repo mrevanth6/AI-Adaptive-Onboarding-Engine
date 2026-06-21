@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     googleId: {
         type: String,
         unique: true,
-        default: null
+        sparse: true // Allows multiple documents to have null values for googleId
     }
 });
 const User = mongoose.model('User', userSchema);
