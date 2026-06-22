@@ -19,7 +19,7 @@ const resumeUpload = async (req, res) => {
 
         res.status(200).json(roadmap);
     } catch (err) {
-
+        console.error(err);
         res.status(err.status || 500).json({ error: err.message });
     }
 };
