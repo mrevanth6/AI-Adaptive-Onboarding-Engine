@@ -10,7 +10,7 @@ function LearningRoadmap() {
 
     return (
         <div className="learning-roadmap">
-            <div className="header">
+            <div className="learning-roadmap-header">
                 <div className='header-text'>
                     <h1>Learning Roadmap</h1>
                     <p>Based on your resume analysis, here is a personalized learning roadmap to help you bridge the skill gaps and enhance your readiness for your target role.</p>

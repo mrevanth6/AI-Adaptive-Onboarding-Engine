@@ -1,5 +1,12 @@
 .learning-roadmap {
-    margin: 10px;
+    margin: 10px 10px;
+}
+
+.learning-roadmap-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px 20px;
 }
 
 .header-text {

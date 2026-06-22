@@ -39,8 +39,7 @@ function ResumeAnalyser() {
       setDisable(false);
     }
     catch (error) {
-
-      alert("An error occurred while uploading the resume. Please try again.");
+      alert(error.response?.data?.message || "An error occurred while uploading the resume. Please try again.");
       setDisable(false);
     }
 
