@@ -48,7 +48,14 @@ MODULE ORDERING — PRIORITIZE BY JD CRITICALITY:
 - A skill explicitly tied to "Core Responsibilities" or day-1 productivity should rank above a peripheral or "nice-to-have" skill, even if the peripheral skill is more foundational in a general sense.
 
 - Each module must have ONE practical, verifiable milestone — not just theory. The milestone should be appropriate to the skill's domain (e.g., a code deliverable for technical skills, a designed artifact/prototype for design skills, a written analysis/document for strategy or communication skills, a presentation or mock session for soft skills).
-- Tailor the "reason" field to the candidate's actual background — reference their specific projects, tools, roles, or experience by name where relevant. Be specific, not generic. Do NOT contradict the gap_analysis classification (e.g., do not say a skill is "missing" in gap_analysis but then reference existing experience with that exact skill in the reason as if they already have it — if they have related experience, that should have placed the skill in "partial" or "proficient" instead).
+
+- Write the "reason" field in second-person, speaking directly TO the candidate as a mentor would. 
+- Structure every "reason" in two parts:
+    1. WHY: Connect to their specific background — reference their actual projects, tools, or experience by name to explain why this module is relevant or attainable for them specifically.
+    2. WHAT YOU'LL GAIN: Tell them what concrete capability they will walk away with after completing this module — what they'll be able to do that they couldn't before.
+- Example format: "You've built RESTful APIs with Node.js in your AI Adaptive Learning Platform, so you already understand how data flows between client and server. In this module, you'll learn how GraphQL replaces that REST layer — giving you the ability to design flexible, efficient APIs that let clients request exactly the data they need, reducing over-fetching and making your backends significantly more scalable."
+- Do NOT write in third person. Do NOT use phrases like "Mekala has..." or "The candidate demonstrates..." or "This module will provide them...". Always use "you" and "your".
+- Do NOT contradict the gap_analysis classification — if a skill is "missing", do not imply the candidate already has experience with it.
 - Limit the roadmap to a MAXIMUM of 8 modules. If there are more gaps than that, prioritize the most critical/foundational ones and combine related smaller gaps into a single module.
 
 OUTPUT RULES:
@@ -95,7 +102,7 @@ async function generateRoadmap(candidateProfile, roleCompetencyMap) {
             },
         },
     });
-    const prompt = buildRoadmapPrompt(candidateProfile, roleCompetencyMap);
+    const prompt = buildRoadmapPrompt(candidateProfile, roleCompetencyMap, roleCompetencyMap.role_title);
     let raw;
     try {
         const result = await model.generateContent(prompt);
