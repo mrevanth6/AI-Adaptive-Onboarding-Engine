@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './resume-analyzer.css';
 const API_URL = import.meta.env.VITE_API_URL;
+import { toast } from "react-toastify";
 function ResumeAnalyser() {
   const navigate = useNavigate();
   const [resume, setResume] = useState();
@@ -22,24 +23,33 @@ function ResumeAnalyser() {
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` // Include the token in the Authorization header
           }
         }
       );
       console.log(response);
+      // If Invalid token, redirect to login page
+      if (response.status === 401) {
+        toast.error("Invalid token. Please login again.");
+        localStorage.removeItem('token');
+        navigate('/login', { replace: true });
+        return;
+      }
       if (response.status === 200) {
         const data = response.data;
 
         localStorage.setItem('resumeData', JSON.stringify(data));
         navigate('/roadmap', { state: data });
       } else {
-        alert("Error uploading resume. Please try again.");
-
+        toast.error("Error uploading resume. Please try again.");
       }
-      setDisable(false);
     }
     catch (error) {
-      alert(error.response?.data?.message || "An error occurred while uploading the resume. Please try again.");
+      toast.error(error.response?.data?.message || "An error occurred while uploading the resume. Please try again.");
+
+    }
+    finally {
       setDisable(false);
     }
 

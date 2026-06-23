@@ -9,6 +9,7 @@ import Layout from "./components/Layout.jsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import SavedRoadMaps from "./components/SavedRoadMaps.jsx";
 function App() {
   return (
     <Router>
@@ -33,6 +34,7 @@ function App() {
             </ProtectedRoute>}>
             <Route path="/analyzer" element={<ResumeAnalyser />} />
             <Route path="/roadmap" element={<LearningRoadMap />} />
+            <Route path="/saved-roadmaps" element={<SavedRoadMaps />} />
           </Route>
         </Routes>
       </div>
