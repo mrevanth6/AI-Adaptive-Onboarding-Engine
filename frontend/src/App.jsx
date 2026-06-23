@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import Layout from "./components/Layout.jsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 function App() {
   return (
     <Router>
@@ -22,11 +23,14 @@ function App() {
           pauseOnFocusLoss={false}
         />
         <Routes>
-          <Route element={<Layout />} />
-          {/* <Route path="/" element={<ResumeAnalyzer />} /> */}
-          {/* <Route path="/login" element={<LoginInPage />} />
-          <Route path="/signup" element={<SignUpPage />} /> */}
-          <Route element={<Layout />} >
+
+          <Route path="/" element={<LoginInPage />} />
+          <Route path="/login" element={<LoginInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>}>
             <Route path="/analyzer" element={<ResumeAnalyser />} />
             <Route path="/roadmap" element={<LearningRoadMap />} />
           </Route>
