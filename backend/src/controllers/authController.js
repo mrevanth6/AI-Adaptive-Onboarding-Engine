@@ -33,7 +33,7 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ token });
+        res.status(200).json({ token, savedRoadmaps: user.savedRoadmaps });
     } catch (err) {
 
         res.status(500).json({ message: 'Server error' });
@@ -57,7 +57,7 @@ const googleLogin = async (req, res) => {
             user = await User.create({ email, googleId });
         }
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ token });
+        res.status(200).json({ token, savedRoadmaps: user.savedRoadmaps });
 
     } catch (e) {
 

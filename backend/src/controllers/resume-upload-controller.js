@@ -13,11 +13,14 @@ const resumeUpload = async (req, res) => {
         const extractedSkills = await analyseResume(cleanedText);
 
         const JDSkills = await analyseJD(jobDescription);
-
-
         const roadmap = await generateRoadmap(extractedSkills, JDSkills);
-
-        res.status(200).json(roadmap);
+        // Find the user by ID from the request (assuming you have user authentication and the user ID is available in req.user)
+        const user = await User.findById(req.user.userId);
+        // Save the generated roadmap to the user's savedRoadmaps array
+        user.savedRoadmaps.push({ role_title: JDSkills.role_title, roadmap });
+        await user.save();
+        // Send the roadmap and the updated savedRoadmaps back to the frontend
+        res.status(200).json({ message: 'Resume processed successfully', roadmap, savedRoadmaps: user.savedRoadmaps });
     } catch (err) {
         console.error(err);
         res.status(err.status || 500).json({ error: err.message });

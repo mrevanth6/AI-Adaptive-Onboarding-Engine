@@ -15,7 +15,24 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         sparse: true // Allows multiple documents to have null values for googleId
-    }
+    },
+    savedRoadmaps: [
+        {
+            role_title: {
+                type: String,
+                required: true
+            },
+            roadmap: {
+                type: mongoose.Schema.Types.Mixed,
+                default: []
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+
+    ]
 });
 const User = mongoose.model('User', userSchema);
 module.exports = User;
