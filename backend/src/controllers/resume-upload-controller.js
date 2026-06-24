@@ -20,7 +20,7 @@ const resumeUpload = async (req, res) => {
         user.savedRoadmaps.push({ role_title: JDSkills.role_title, roadmap });
         await user.save();
         // Send the roadmap and the updated savedRoadmaps back to the frontend
-        res.status(200).json({ message: 'Resume processed successfully', roadmap, savedRoadmaps: user.savedRoadmaps });
+        res.status(200).json({ message: 'Resume processed successfully', roadmap });
     } catch (err) {
         console.error(err);
         res.status(err.status || 500).json({ error: err.message });
