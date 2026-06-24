@@ -1,6 +1,7 @@
 const { extractText, cleanText } = require('../services/parser_service');
 const { analyseResume, analyseJD } = require('../services/skillsExtractor');
 const { generateRoadmap } = require('../services/resume_analyser');
+const User = require('../models/User');
 const resumeUpload = async (req, res) => {
     try {
         if (!req.file) {
