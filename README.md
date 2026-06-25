@@ -1,108 +1,168 @@
-# 🚀 AI Resume Analyzer & Career Roadmap Generator
+# AI-Powered Adaptive Learning & Onboarding Platform
 
-## 📌 Overview
-The AI Resume Analyzer & Career Roadmap Generator is a smart web application that helps users analyze their resumes against a specific job role and provides a personalized roadmap to improve their skills.
-
-It uses AI and NLP techniques to extract skills from resumes, compare them with job requirements, and generate a structured learning path to bridge skill gaps.
+An AI-powered full-stack web application that analyzes resumes, identifies skill gaps, and generates personalized learning roadmaps to help users prepare for their target roles.
 
 ---
 
-## 🎯 Features
-- 📄 Upload Resume (PDF/Text)
-- 🔍 AI-based Skill Extraction
-- 📊 Skill Gap Analysis
-- 🧠 Personalized Career Roadmap
-- ⚡ Fast & Interactive UI
-- 📌 Job Description Matching
+## Overview
+
+Traditional onboarding and career development processes are often generic and inefficient. This platform provides personalized learning recommendations by analyzing a user's resume and comparing their existing skills with the requirements of a target role.
+
+Using Google's Gemini API, the application performs skill-gap analysis and generates adaptive learning roadmaps tailored to individual users.
 
 ---
 
-## 🏗️ Architecture
+## Features
 
-Frontend (React.js)  
-        ↓  
-Backend (Node.js / Flask API)  
-        ↓  
-Resume Parsing (PDF/Text Extraction)  
-        ↓  
-AI/NLP Processing (Skill Extraction)  
-        ↓  
-Skill Comparison Engine  
-        ↓  
-Roadmap Generator  
+* Secure user authentication using JWT.
+* Resume upload support for PDF and DOCX files.
+* Automatic resume parsing and skill extraction.
+* AI-powered skill-gap analysis.
+* Competency mapping based on target roles.
+* Personalized learning roadmap generation.
+* Weekly learning modules and recommendations.
+* Responsive user interface for desktop and mobile devices.
+* Saved learning roadmaps for future reference.
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 ### Frontend
-- React.js  
-- CSS / Tailwind CSS  
-- Axios  
+
+* React.js
+* React Router
+* Axios
+* CSS
 
 ### Backend
-- Node.js + Express  
-  *or*  
-- Python (Flask / FastAPI)  
 
-### AI / NLP
-- OpenAI API (LLM for analysis & roadmap generation)  
-- spaCy / NLTK (Natural Language Processing)  
-- Embedding models (semantic similarity)  
+* Node.js
+* Express.js
+* MongoDB
+* JWT Authentication
+* Multer
 
-### Database
-- MongoDB / Firebase  
+### AI Integration
 
----
-
-## 🔄 Workflow
-1. User uploads resume  
-2. User enters job role or job description  
-3. Resume is parsed (PDF/Text extraction)  
-4. Skills are extracted using NLP  
-5. Extracted skills are compared with required skills  
-6. Skill gaps are identified  
-7. AI generates a personalized roadmap  
+* Google Gemini API
 
 ---
 
-## 🧠 Core Algorithms
+## Application Workflow
 
-### Skill Extraction
-- Named Entity Recognition (NER)  
-- Keyword matching + semantic similarity  
+1. User registers or logs into the platform.
+2. User uploads a resume in PDF or DOCX format.
+3. Resume content is extracted and processed.
+4. User specifies a target role or job description.
+5. The application performs skill-gap analysis.
+6. Missing skills and competencies are identified.
+7. Gemini generates a personalized learning roadmap.
+8. The roadmap is saved for future access.
+
+---
+
+## Key Functionalities
+
+### Resume Parsing
+
+Extracts text and relevant information from uploaded resumes.
 
 ### Skill Gap Analysis
-- Compare extracted skills with job-required skills  
-- Identify missing and weak skills  
 
-### Adaptive Pathing Algorithm
-- Graph-based roadmap generation:
-  - Nodes → Skills  
-  - Edges → Prerequisites  
-- Generates step-by-step learning sequence  
+Compares existing skills with target role requirements and identifies missing competencies.
 
----
+### Competency Mapping
 
-## 📊 Datasets
-- Public job description datasets (Kaggle)  
-- Skill taxonomies (O*NET, ESCO)  
-- Sample resume datasets  
+Categorizes user skills into proficient, partial, and missing areas.
+
+### Personalized Roadmaps
+
+Generates adaptive weekly learning plans with recommended topics and modules.
 
 ---
 
-## 📈 Metrics
-- Skill extraction accuracy  
-- Recommendation relevance score  
-- User satisfaction  
-- Processing time  
+## Project Structure
 
----
+```text
+frontend/
+│
+├── src/
+├── components/
+├── pages/
+└── assets/
 
-## 🚀 Installation & Setup
+backend/
+│
+├── routes/
+├── controllers/
+├── middleware/
+├── services/
+└── models/
+```
 
-### 1. Clone the Repository
+## Installation
+
+### Clone the Repository
+
 ```bash
-git clone https://github.com/your-username/ai-resume-analyzer.git
-cd ai-resume-analyzer
+git clone https://github.com/your-username/AI-Adaptive-Onboarding-Engine.git
+cd AI-Adaptive-Onboarding-Engine
+```
 
+### Backend Setup
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file inside the backend folder.
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+GEMINI_API_KEY=your_gemini_api_key
+GOOGLE_SECRET_ID=your_google_secret_id
+```
+
+---
+
+## Future Enhancements
+
+* Learning progress tracking.
+* Course recommendations.
+* Roadmap completion analytics.
+* Email notifications.
+* AI interview preparation.
+* Deployment and cloud hosting.
+
+---
+
+## Developed During
+
+This project was developed during a hackathon to address challenges in traditional employee onboarding and personalized upskilling.
+
+---
+
+## Author
+
+M. Revanth Kumar Reddy
+
+Computer Science Engineering Student
+
+GitHub: https://github.com/mrevanth6
