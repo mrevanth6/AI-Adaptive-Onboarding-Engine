@@ -11,7 +11,9 @@ function Header() {
     function handleLogOut() {
         setExpanded(false);
         setOpen(false);
+        // Remove the token and savedRoadmaps from localStorage
         localStorage.removeItem("token");
+        localStorage.removeItem("savedRoadmaps");
         navigate("/login", { replace: true });
     }
 

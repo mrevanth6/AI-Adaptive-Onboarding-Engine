@@ -36,7 +36,16 @@ function LoginInPage() {
         try {
             const response = await axios.post("https://ai-adaptive-onboarding-engine-d0qy.onrender.com/api/auth/login", { email, password });
             if (response.status === 200) {
-                const { token } = response.data;
+                const { token, savedRoadmaps } = response.data;
+                localStorage.setItem("token", token);
+                // Save the savedRoadmaps to localStorage
+                if (savedRoadmaps && Array.isArray(savedRoadmaps)) {
+                    localStorage.setItem("savedRoadmaps", JSON.stringify(savedRoadmaps));
+                }
+                else {
+                    localStorage.setItem("savedRoadmaps", JSON.stringify([]));
+                }
+                // Save the token to localStorage
                 localStorage.setItem("token", token);
                 toast.success("Login successful!");
                 navigate("/analyzer");
@@ -47,24 +56,7 @@ function LoginInPage() {
             toast.error(error.response?.data?.message || "An error occurred during login. Please try again.");
         }
     }
-    // const googleLoginOnSuccess = async (credentialResponse) => {
-    //     try {
-    //         const response = await axios.post(`${API_URL}/auth/google-login`,
-    //             { access_token: credentialResponse.credential });
-    //         if (response.status === 200) {
-    //             const { token } = response.data;
-    //             localStorage.setItem("token", token);
-    //             toast.success("Login successful!");
-    //             navigate("/analyzer");
-    //         }
-    //     }
-    //     catch (error) {
-    //         toast.error(error.response?.data?.message || "An error occurred during login. Please try again.");
-    //     }
-    // }
-    // const googleLoginOnError = () => {
-    //     toast.error("Google login failed. Please try again.");
-    // }
+
 
     const signInWithGoogle = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
@@ -74,8 +66,9 @@ function LoginInPage() {
                 const response = await axios.post("https://ai-adaptive-onboarding-engine-d0qy.onrender.com/api/auth/google-login", { access_token: tokenResponse.access_token });
                 console.log(response);
                 if (response.status === 200) {
-                    const { token } = response.data;
+                    const { token, savedRoadmaps } = response.data;
                     localStorage.setItem("token", token);
+                    localStorage.setItem("savedRoadmaps", JSON.stringify(savedRoadmaps));
                     toast.success("Login successful!");
                     navigate("/analyzer");
                 }

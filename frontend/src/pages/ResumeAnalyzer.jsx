@@ -37,15 +37,25 @@ function ResumeAnalyser() {
         return;
       }
       if (response.status === 200) {
-        const data = response.data;
+        const { message, data } = response.data;
+        toast.success(message);
+        // Save the roadmap to localStorage
+        localStorage.setItem('roadmap', JSON.stringify(data.roadmap));
+        // Save the the roadmap to previously saved roadmaps in localStorage
+        const savedRoadmaps = JSON.parse(localStorage.getItem('savedRoadmaps')) || [];
+        savedRoadmaps.push(data);
+        // Save the updated savedRoadmaps to localStorage
+        localStorage.setItem('savedRoadmaps', JSON.stringify(savedRoadmaps));
+        // Navigate to the roadmap page and pass the roadmap as state
+        console.log("Navigating to roadmap page with roadmap:", data.roadmap);
+        navigate('/roadmap', { state: data.roadmap });
 
-        localStorage.setItem('resumeData', JSON.stringify(data));
-        navigate('/roadmap', { state: data });
       } else {
         toast.error("Error uploading resume. Please try again.");
       }
     }
     catch (error) {
+      console.error(error.response?.data?.message || error.message);
       toast.error(error.response?.data?.message || "An error occurred while uploading the resume. Please try again.");
 
     }
