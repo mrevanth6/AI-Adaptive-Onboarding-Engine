@@ -6,8 +6,6 @@ function authMiddleware(req, res, next) {
         return res.status(401).json({ message: 'Authorization header missing' });
     }
     const token = authHeader.split(' ')[1];
-    console.log(process.env.JWT_SECRET_KEY);
-    console.log("Token from authMiddleware:", token); // Log the token for debugging
     if (!token) {
         return res.status(401).json({ message: 'Token missing' });
     }
