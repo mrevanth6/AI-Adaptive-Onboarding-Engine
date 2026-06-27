@@ -117,6 +117,14 @@
     color: #9CA3AF;
 }
 
+.verified-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #10B981;
+}
+
 .input-wrapper input {
     width: 100%;
     padding: 14px 14px 14px 46px;
@@ -138,7 +146,9 @@
     box-shadow: 0 0 0 3px rgba(108, 99, 255, .15);
 }
 
-.signup-btn {
+.signup-btn,
+.send-otp-btn,
+.verify-otp-btn {
     border: none;
 
     padding: 14px;
@@ -156,6 +166,21 @@
     cursor: pointer;
 
     transition: .3s;
+}
+
+.signup-btn:disabled {
+    background: #9677f3;
+    cursor: not-allowed;
+}
+
+.verify-otp-btn:disabled {
+    background: #9677f3;
+    cursor: not-allowed;
+}
+
+.send-otp-btn:disabled {
+    background: #9677f3;
+    cursor: not-allowed;
 }
 
 .signup-btn:hover {
@@ -242,6 +267,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.hide {
+    display: none;
 }
 
 @media (max-width: 992px) {

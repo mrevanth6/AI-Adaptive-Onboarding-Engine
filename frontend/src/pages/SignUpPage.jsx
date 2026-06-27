@@ -5,15 +5,17 @@ import { Lock, Mail } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, CircleCheckBig } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import "./SignUpPage.css";
 const API_URL = import.meta.env.VITE_API_URL;
-console.log(API_URL);
 function SignUpPage() {
     const navigate = useNavigate();
+    const [otp, setOtp] = useState("");
+    const [otpVerified, setOtpVerified] = useState(false);
+    const [otpSent, setOtpSent] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,6 +30,28 @@ function SignUpPage() {
     function onConfirmPasswordChange(e) {
         setConfirmPassword(e.target.value);
     }
+    function onOtpChange(e) {
+        const otp = e.target.value;
+        setOtp(otp);
+    }
+    // Function to send OTP
+    function sendOtp() {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isEmailValid = re.test(email);
+        if (!isEmailValid) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+        console.log("OTP SENT");
+        setOtpSent(true);
+    }
+    // Function to verify OTP
+    const verifyOtp = () => {
+        if (otp === "123456") {
+            setOtpVerified(true);
+        }
+    };
+    // Function to handle form submission
     async function handleSubmit(e) {
         e.preventDefault();
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,7 +66,6 @@ function SignUpPage() {
         if (isEmailValid && isPasswordMatch) {
             // Proceed with sign-up logic
             try {
-                console.log(API_URL);
                 const response = await axios.post(`${API_URL}/api/auth/register`, { email, password });
                 if (response.status === 201) {
                     toast.success("Account created successfully! Please log in.");
@@ -103,10 +126,38 @@ function SignUpPage() {
                                 onChange={onEmailChange}
 
                             />
+                            <CircleCheckBig size={18} className='verified-icon' display={`${otpVerified ? "block" : "none"}`} />
                         </div>
+                        <button type="button"
+                            className={`send-otp-btn ${otpVerified ? "hide" : ""}`}
+                            onClick={sendOtp}
+                            disabled={otpVerified}
+                        >
+                            Send OTP
+                        </button>
                     </div>
-
-                    <div className="form-group">
+                    <div className={`form-group ${!otpSent || otpVerified ? "hide" : ""}`}>
+                        <label htmlFor="otp" className="required">One-Time Password</label>
+                        <div className="input-wrapper">
+                            <Lock size={18} className="input-icon" />
+                            <input
+                                type="text"
+                                id="otp"
+                                name="otp"
+                                placeholder="Enter the OTP sent to your email"
+                                required
+                                onChange={onOtpChange}
+                            />
+                        </div>
+                        <button type="button"
+                            className="verify-otp-btn"
+                            onClick={verifyOtp}
+                            disabled={!otpSent || otpVerified}
+                        >
+                            Verify OTP
+                        </button>
+                    </div>
+                    <div className={`form-group ${!otpVerified ? "hide" : ""}`}>
                         <label htmlFor="password" className="required">Password</label>
 
                         <div className="input-wrapper">
@@ -119,13 +170,15 @@ function SignUpPage() {
                                 placeholder="Enter your password"
                                 required
                                 onChange={onPasswordChange}
+                                disabled={!otpVerified}
+
                             />
                             <span className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </span>
                         </div>
                     </div>
-                    <div className="form-group">
+                    <div className={`form-group ${!otpVerified ? "hide" : ""}`}>
                         <label htmlFor="confirmPassword" className="required">Confirm Password</label>
 
                         <div className="input-wrapper">
@@ -138,6 +191,7 @@ function SignUpPage() {
                                 placeholder="Confirm your password"
                                 required
                                 onChange={onConfirmPasswordChange}
+                                disabled={!otpVerified}
                             />
                             <span className="password-toggle" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                 {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -148,7 +202,8 @@ function SignUpPage() {
 
                     <button
                         type="submit"
-                        className="signup-btn"
+                        className={`signup-btn ${!otpVerified ? "hide" : ""}`}
+                        disabled={!otpVerified}
 
                     >
                         Register
@@ -185,8 +240,8 @@ function SignUpPage() {
                     </div >
                 </div>
 
-            </div>
-        </div>
+            </div >
+        </div >
 
     )
 
