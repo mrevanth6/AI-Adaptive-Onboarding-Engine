@@ -60,7 +60,10 @@
 }
 
 
-.login-container {
+.login-container,
+.forgot-password-container,
+.otp-verification-container,
+.reset-password-container {
     height: 100vh;
     width: fit-content;
     margin: 40px 0 0 60px;
@@ -71,15 +74,25 @@
     gap: 20px;
 }
 
-.login-container-header {
+.login-container-header,
+.forgot-password-header,
+.otp-verification-header,
+.reset-password-header {
     padding: 10px;
+
 }
 
-.login-container-header h1 {
+.login-container-header h2,
+.forgot-password-header h2,
+.otp-verification-header h2,
+.reset-password-header h2 {
     margin-bottom: 10px;
 }
 
-.login-form {
+.login-form,
+.forgot-password-form,
+.otp-verification-form,
+.reset-password-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -140,7 +153,8 @@
     box-shadow: 0 0 0 3px rgba(108, 99, 255, .15);
 }
 
-.login-btn {
+.login-btn,
+.reset-password-btn {
     border: none;
 
     padding: 14px;
@@ -270,13 +284,19 @@
         background-size: 50%;
     }
 
-    .login-container {
+    .login-container,
+    .forgot-password-container,
+    .otp-verification-container,
+    .reset-password-container {
         width: 100%;
         margin: 20px auto;
         align-items: center;
     }
 
-    .login-form {
+    .login-form,
+    .forgot-password-form,
+    .otp-verification-form,
+    .reset-password-form {
         width: 90%;
         max-width: 500px;
     }
@@ -293,7 +313,10 @@
         display: none;
     }
 
-    .login-container {
+    .login-container,
+    .forgot-password-container,
+    .otp-verification-container,
+    .reset-password-container {
         width: 100%;
         height: auto;
         margin: 0;
@@ -301,16 +324,25 @@
         align-items: stretch;
     }
 
-    .login-form {
+    .login-form,
+    .forgot-password-form,
+    .otp-verification-form,
+    .reset-password-form {
         width: 100%;
         padding: 0;
     }
 
-    .login-container-header {
+    .login-container-header,
+    .forgot-password-header,
+    .otp-verification-header,
+    .reset-password-header {
         padding: 0;
     }
 
-    .login-container-header h1 {
+    .login-container-header h2,
+    .forgot-password-header h2,
+    .otp-verification-header h2,
+    .reset-password-header h2 {
         font-size: 2rem;
     }
 

@@ -35,20 +35,39 @@ function SignUpPage() {
         setOtp(otp);
     }
     // Function to send OTP
-    function sendOtp() {
+    async function sendOtp() {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const isEmailValid = re.test(email);
         if (!isEmailValid) {
             toast.error("Please enter a valid email address.");
             return;
         }
-        console.log("OTP SENT");
-        setOtpSent(true);
+        // Here you would call the backend API to send the OTP to the user's email.
+        try {
+            const response = await axios.post(`${API_URL}/api/auth/otp/send`, { email: email, type: "signup" });
+            if (response.status === 200) {
+                toast.success("OTP sent successfully! Please check your email.");
+                setOtpSent(true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred while sending OTP. Please try again.");
+            console.error(error);
+            return;
+        }
+
     }
     // Function to verify OTP
-    const verifyOtp = () => {
-        if (otp === "123456") {
-            setOtpVerified(true);
+    const verifyOtp = async () => {
+        // Here you would call the backend API to verify the OTP entered by the user.
+        try {
+            const response = await axios.post(`${API_URL}/api/auth/otp/verify`, { email: email, otp: otp, type: "signup" });
+            if (response.status === 200) {
+                toast.success("OTP verified successfully!");
+                setOtpVerified(true);
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred while verifying OTP. Please try again.");
+            console.error(error);
         }
     };
     // Function to handle form submission
