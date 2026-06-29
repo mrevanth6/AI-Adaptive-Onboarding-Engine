@@ -39,6 +39,26 @@ const loginUser = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 }
+const resetPassword = async (req, res) => {
+    try {
+        const { email, newPassword } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+        // If user is registered using Google, they cannot reset password using this method
+        if (user.googleId) {
+            return res.status(400).json({ message: 'Password reset not allowed for Google registered users' });
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        user.password = hashedPassword;
+        await user.save();
+        res.status(200).json({ message: 'Password reset successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error' });
+    }
+}
 const googleLogin = async (req, res) => {
     try {
         const { access_token } = req.body;
@@ -65,4 +85,4 @@ const googleLogin = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, googleLogin };
+module.exports = { registerUser, loginUser, googleLogin, resetPassword };

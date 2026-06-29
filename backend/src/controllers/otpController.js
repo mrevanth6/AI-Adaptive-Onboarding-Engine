@@ -15,7 +15,7 @@ async function sendOTP(req, res) {
             return res.status(400).json({ message: 'User already exists' });
         }
         if (type === 'reset-password' && !isUserExists) {
-            return res.status(400).json({ message: 'User does not exist' });
+            return res.status(400).json({ message: 'User does not exist.Please sign up first.' });
         }
         // Handle the case where an OTP already exists for the email and type and delete it before creating a new one also handles Resend OTP scenario
         const existingOTP = await OTP.findOne({ email, type });
