@@ -40,17 +40,28 @@ function LoginInPage() {
             toast.error("Please enter a valid email address.");
             return;
         }
-        toast.success("OTP sent to your email address!");
-        console.log("OTP SENT");
-        setAuthView("otp-verification");
+        try {
+            const response = await axios.post(`${API_URL}/api/auth/otp/send`, { email: email, type: 'reset-password' });
+            if (response.status === 200) {
+                toast.success("OTP sent to your email address!");
+                setAuthView("otp-verification");
+            }
+        }
+        catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred while sending OTP. Please try again.");
+        }
     }
     async function verifyOtp(e) {
         e.preventDefault();
-        if (otp === "123456") {
-            toast.success("OTP verified successfully!");
-            setAuthView("reset-password");
-        } else {
-            toast.error("Invalid OTP. Please try again.");
+        try {
+            const response = await axios.post(`${API_URL}/api/auth/otp/verify`, { email: email, otp: otp, type: 'reset-password' });
+            if (response.status === 200) {
+                toast.success("OTP verified successfully!Please reset your password.");
+                setAuthView("reset-password");
+            }
+        }
+        catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred while verifying OTP. Please try again.");
         }
     }
     async function resetPassword(e) {
@@ -60,9 +71,16 @@ function LoginInPage() {
             toast.error("Passwords do not match.");
             return;
         }
-
-        toast.success("Password reset successfully!Please login with your new password.");
-        setAuthView("login");
+        try {
+            const response = await axios.post(`${API_URL}/api/auth/reset-password`, { email: email, newPassword: newPassword });
+            if (response.status === 200) {
+                toast.success("Password reset successfully! Please login with your new password.");
+                setAuthView("login");
+            }
+        }
+        catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred while resetting password. Please try again.");
+        }
     }
     async function handleSubmit(e) {
         e.preventDefault();
