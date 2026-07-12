@@ -1,24 +1,27 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-require('dotenv').config();
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const OpenAI = require("openai");
+require("dotenv").config();
 
+const client = new OpenAI({
+  apiKey: process.env.NVIDIA_API_KEY,
+  baseURL: "https://integrate.api.nvidia.com/v1",
+});
 function buildResumeAnalysisPrompt(resumeText) {
-    return `
-You are an expert technical recruiter and skills analyst. Your job is to deeply analyse a resume and extract a structured skill profile of the candidate.
- 
-Analyse the resume below carefully. Look at:
-- The explicit Skills section (if present)
-- Every project description — infer the technologies and concepts used
-- Job/internship responsibilities — infer skills from what they built or did
-- Education and certifications
-- Any tools, frameworks, platforms, or methodologies mentioned anywhere
- 
-For each skill you find, assign a proficiency level based on evidence in the resume:
-- "beginner"      → mentioned once, no context, or described as "familiar with / exposure to"
-- "intermediate"  → used in projects or internships with some described outcomes
-- "advanced"      → led projects using it, multiple years, or described as expert/proficient
- 
-Group the skills into categories. Use these standard categories:
+  return `
+You are an expert technical recruiter.
+
+Analyze the resume and return a structured skill profile.
+
+Tasks:
+- Extract skills from the Skills section, projects, experience, education, and certifications.
+- Infer implicit technical skills from project descriptions (e.g. REST API → REST, HTTP, API Design).
+- Normalize skill names (ReactJS → React, Postgres → PostgreSQL).
+- Assign proficiency:
+  - beginner: mentioned with little evidence
+  - intermediate: used in projects/work
+  - advanced: extensive or repeated professional use
+
+Group skills into:
 - programming_languages
 - frameworks_and_libraries
 - databases
@@ -26,168 +29,165 @@ Group the skills into categories. Use these standard categories:
 - tools_and_platforms
 - concepts_and_methodologies
 - soft_skills
- 
-IMPORTANT RULES:
-1. Only extract skills that have actual evidence in the resume. Do not hallucinate.
-2. Infer implicit skills from project descriptions (e.g. "Built REST API" → infer REST, HTTP, API design)
-3. Normalise skill names (e.g. "ReactJS" → "React", "Postgres" → "PostgreSQL")
-4. Return ONLY a valid JSON object. No explanation, no markdown, no backticks.
- 
+
+Rules:
+- Only include skills supported by evidence.
+- Return ONLY valid JSON.
+
 Resume:
----
 ${resumeText}
----
- 
-Return this exact JSON structure:
+
+Return:
 {
-  "candidate_name": "string or null",
-  "total_experience_years": number or null,
+  "candidate_name": null,
+  "total_experience_years": null,
   "skills": {
-    "programming_languages": [
-      { "name": "string", "proficiency": "beginner|intermediate|advanced", "evidence": "brief reason" }
-    ],
-    "frameworks_and_libraries": [...],
-    "databases": [...],
-    "cloud_and_devops": [...],
-    "tools_and_platforms": [...],
-    "concepts_and_methodologies": [...],
-    "soft_skills": [...]
+    "programming_languages": [],
+    "frameworks_and_libraries": [],
+    "databases": [],
+    "cloud_and_devops": [],
+    "tools_and_platforms": [],
+    "concepts_and_methodologies": [],
+    "soft_skills": []
   },
-  "top_skills": ["list of 5 strongest skills based on evidence"],
-  "experience_summary": "2-3 sentence summary of the candidate's background"
+  "top_skills": [],
+  "experience_summary": ""
 }
 `;
 }
 
-
 function analyseJobDescription(input) {
-    const isFullJD = input.length > 150; // rough check
+  const isFullJD = input.length > 150; // rough check
+  return `You are a technical recruiter.
 
-    if (isFullJD) {
-        return `
-You are a technical hiring expert. Extract a structured competency map from the job description below.
+Analyze the job description and identify:
 
-Extract:
-- Required skills (must-have) with minimum proficiency level
-- Nice-to-have skills
-- Seniority level (junior / mid / senior)
-- Role category (frontend / backend / fullstack / data / devops etc.)
+- Role title
+- Seniority (junior, mid, senior)
+- Role category
+- Required skills
+- Minimum proficiency
+- Skill importance (core, supporting, nice_to_have)
+
+Return ONLY valid JSON.
 
 Job Description:
----
 ${input}
----
 
-Return ONLY valid JSON:
+Return:
 {
-  "role_title": "string",
-  "seniority_level": "junior|mid|senior",
-  "role_category": "string",
+  "role_title": "",
+  "seniority_level": "",
+  "role_category": "",
   "required_skills": [
-    { "name": "string", "min_proficiency": "beginner|intermediate|advanced", "weight": "core|supporting|nice_to_have" }
-  ]
-}`;
-    } else {
-        return `
-You are a technical hiring expert. Generate a competency map for the role: "${input}".
-
-List the skills typically required for this role at a mid-level seniority.
-
-Return ONLY valid JSON:
-{
-  "role_title": "string",
-  "seniority_level": "mid",
-  "role_category": "string",
-  "required_skills": [
-    { "name": "string", "min_proficiency": "beginner|intermediate|advanced", "weight": "core|supporting|nice_to_have" }
-  ]
-}`;
+    {
+      "name": "",
+      "min_proficiency": "",
+      "weight": ""
     }
+  ]
+`;
 }
-
-
 
 async function analyseResume(resumeText) {
-    if (!resumeText || resumeText.trim().length < 50) {
-        throw new Error("Resume text is too short or empty to analyse.");
-    }
+  if (!resumeText || resumeText.trim().length < 50) {
+    throw new Error("Resume text is too short or empty to analyse.");
+  }
 
-    const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
-        generationConfig: {
-            temperature: 0.1,       // Low temperature = consistent, factual output
-            topP: 0.8,
-            maxOutputTokens: 8192,
+  const prompt = buildResumeAnalysisPrompt(resumeText);
+
+  let raw;
+  try {
+    const completion = await client.chat.completions.create({
+      model: "meta/llama-3.1-70b-instruct", // or "meta/llama-3.1-70b-instruct"
+      messages: [
+        {
+          role: "user",
+          content: prompt,
         },
+      ],
+      temperature: 0.1,
+      top_p: 0.8,
+      max_tokens: 2048,
     });
+    const finishReason = completion.choices[0]?.finish_reason;
 
-    const prompt = buildResumeAnalysisPrompt(resumeText);
-
-    let raw;
-    try {
-        const result = await model.generateContent(prompt);
-        raw = result.response.text();
-    } catch (err) {
-        throw new Error(`Gemini API error during resume analysis: ${err.message}`);
+    if (finishReason === "length") {
+      throw new Error("Response truncated — increase max_tokens.");
     }
+    raw = completion.choices[0]?.message?.content;
+    if (!raw) throw new Error("Empty response from NVIDIA NIM.");
+  } catch (err) {
+    throw new Error(`NVIDIA NIM API error: ${err.message}`);
+  }
 
-    // ── Strip markdown fences if Gemini wraps output despite instructions ──
-    const cleaned = raw
-        .replace(/```json\s*/gi, "")
-        .replace(/```\s*/g, "")
-        .trim();
+  const cleaned = raw
+    .replace(/```json\s*/gi, "")
+    .replace(/```\s*/g, "")
+    .trim();
 
-    let parsed;
-    try {
-        parsed = JSON.parse(cleaned);
-    } catch {
-        throw new Error(
-            "Failed to parse structured output from AI. Raw response: " +
-            cleaned.slice(0, 300)
-        );
-    }
+  const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
 
-    return parsed;
+  if (!jsonMatch) {
+    throw new Error("No JSON object found in response.");
+  }
+
+  let parsed;
+
+  try {
+    parsed = JSON.parse(jsonMatch[0]);
+  } catch (err) {
+    console.error("Raw Response:", cleaned);
+    throw new Error("Invalid JSON returned by the model.");
+  }
+
+  return parsed;
 }
 async function analyseJD(jobDescription) {
-    if (!jobDescription) {
-        throw new Error("Provide the Job Description");
-    }
-    const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
-        generationConfig: {
-            temperature: 0.1,       // Low temperature = consistent, factual output
-            topP: 0.8,
-            maxOutputTokens: 4096,
+  if (!jobDescription) {
+    throw new Error("Provide the Job Description");
+  }
+
+  const prompt = analyseJobDescription(jobDescription);
+  let raw;
+  try {
+    const completion = await client.chat.completions.create({
+      model: "meta/llama-3.1-70b-instruct", // or "meta/llama-3.1-70b-instruct"
+      messages: [
+        {
+          role: "user",
+          content: prompt,
         },
+      ],
+      temperature: 0.1,
+      top_p: 0.8,
+      max_tokens: 2048,
     });
-    const prompt = analyseJobDescription(jobDescription);
-    let raw;
-    try {
-        const result = await model.generateContent(prompt);
-        raw = result.response.text();
-    } catch (err) {
-        throw new Error(`Gemini API error during resume analysis: ${err.message}`);
+    const finishReason = completion.choices[0]?.finish_reason;
+
+    if (finishReason === "length") {
+      throw new Error("Response truncated — increase max_tokens.");
     }
-    const cleaned = raw
-        .replace(/```json\s*/gi, "")
-        .replace(/```\s*/g, "")
-        .trim();
+    raw = completion.choices[0]?.message?.content;
+    if (!raw) throw new Error("Empty response from NVIDIA NIM.");
+  } catch (err) {
+    throw new Error(`NVIDIA NIM API error: ${err.message}`);
+  }
+  const cleaned = raw
+    .replace(/```json\s*/gi, "")
+    .replace(/```\s*/g, "")
+    .trim();
 
-    let parsed;
-    try {
-        parsed = JSON.parse(cleaned);
-    } catch {
-        throw new Error(
-            "Failed to parse structured output from AI. Raw response: " +
-            cleaned.slice(0, 300)
-        );
-    }
+  let parsed;
+  try {
+    parsed = JSON.parse(cleaned);
+  } catch {
+    throw new Error(
+      "Failed to parse structured output from AI. Raw response: " + cleaned,
+    );
+  }
 
-    return parsed;
-
-
+  return parsed;
 }
-
 
 module.exports = { analyseResume, analyseJD };

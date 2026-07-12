@@ -15,11 +15,13 @@ const resumeUpload = async (req, res) => {
     const jobDescription = req.body.jobDescription || "";
     const cleanedText = cleanText(text);
     // Extract skills from the cleaned resume text and job description skills at a time
-    const { extractedSkills, JDSkills } = await Promise.all([
+    const [extractedSkills, JDSkills] = await Promise.all([
       analyseResume(cleanedText),
       analyseJD(jobDescription),
     ]);
+    console.log("Roadmap Generation Started...");
     const roadmap = await generateRoadmap(extractedSkills, JDSkills);
+    console.log("Roadmap Generation Completed.");
     // Find the user by ID from the request (assuming you have user authentication and the user ID is available in req.user)
     const user = await User.findById(req.user.userId);
     // Save the generated roadmap to the user's savedRoadmaps array
