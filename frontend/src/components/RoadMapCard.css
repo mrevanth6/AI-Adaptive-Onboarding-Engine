@@ -6,6 +6,8 @@
 .week-indicator {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 120px;
     margin: 24px 20px 0px 20px;
     background: white;
 }
@@ -27,7 +29,29 @@
 
 .week-range {
     text-align: center;
-    padding: 4px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0;
+}
+
+.week-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+}
+
+.week-duration {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6B7280;
+    line-height: 1.4;
+    margin: 0;
+
 }
 
 .roadmap-card {
@@ -167,6 +191,7 @@
         flex-direction: row;
         gap: 12px;
         align-items: center;
+        width: auto;
     }
 
     .week-number {
@@ -179,10 +204,18 @@
         border-radius: 8px;
         font-size: 14px;
         font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .week-meta {
+        align-items: flex-start;
+        gap: 2px;
+        margin-top: 0;
     }
 
     .week-duration {
-        display: none;
+        font-size: 13px;
+        white-space: nowrap;
     }
 
     .roadmap-card {

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './resume-analyzer.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./resume-analyzer.css";
 const API_URL = import.meta.env.VITE_API_URL;
 import { toast } from "react-toastify";
+import { ArrowRight } from "lucide-react";
+import { Upload } from "lucide-react";
 function ResumeAnalyser() {
   const navigate = useNavigate();
   const [resume, setResume] = useState();
@@ -13,8 +15,8 @@ function ResumeAnalyser() {
     e.preventDefault();
     setDisable(true);
     const formData = new FormData();
-    formData.append('file', resume);
-    formData.append('jobDescription', jobDescription);
+    formData.append("file", resume);
+    formData.append("jobDescription", jobDescription);
     console.log(formData);
     console.log(formData);
     try {
@@ -23,90 +25,97 @@ function ResumeAnalyser() {
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Include the token in the Authorization header
-          }
-        }
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Include the token in the Authorization header
+          },
+        },
       );
       console.log(response);
       // If Invalid token, redirect to login page
       if (response.status === 401) {
         toast.error("Invalid token. Please login again.");
-        localStorage.removeItem('token');
-        navigate('/login', { replace: true });
+        localStorage.removeItem("token");
+        navigate("/login", { replace: true });
         return;
       }
       if (response.status === 200) {
         const { message, data } = response.data;
         toast.success(message);
         // Save the roadmap to localStorage
-        localStorage.setItem('roadmap', JSON.stringify(data.roadmap));
+        localStorage.setItem("roadmap", JSON.stringify(data.roadmap));
         // Save the the roadmap to previously saved roadmaps in localStorage
-        const savedRoadmaps = JSON.parse(localStorage.getItem('savedRoadmaps')) || [];
+        const savedRoadmaps =
+          JSON.parse(localStorage.getItem("savedRoadmaps")) || [];
         savedRoadmaps.push(data);
         // Save the updated savedRoadmaps to localStorage
-        localStorage.setItem('savedRoadmaps', JSON.stringify(savedRoadmaps));
+        localStorage.setItem("savedRoadmaps", JSON.stringify(savedRoadmaps));
         // Navigate to the roadmap page and pass the roadmap as state
         console.log("Navigating to roadmap page with roadmap:", data.roadmap);
-        navigate('/roadmap', { state: data.roadmap });
-
+        navigate("/roadmap", { state: data.roadmap });
       } else {
         toast.error("Error uploading resume. Please try again.");
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error.response?.data?.message || error.message);
-      toast.error(error.response?.data?.message || "An error occurred while uploading the resume. Please try again.");
-
-    }
-    finally {
+      toast.error(
+        error.response?.data?.message ||
+          "An error occurred while uploading the resume. Please try again.",
+      );
+    } finally {
       setDisable(false);
     }
-
   }
   const handleResume = (e) => {
     const file = e.target.files[0];
     setResume(file);
-
-  }
+  };
   const handleJobDescription = (e) => {
     const value = e.target.value;
     setjobDescription(value);
-
-  }
+  };
   return (
     <>
-      <div className='resume-analyzer'>
+      <div className="resume-analyzer">
         <form onSubmit={handleSubmit}>
-          <div className='resume-card'>
-
+          <div className="resume-card">
             <h2>Upload Resume</h2>
-            <div className='input-group'>
+            <div className="input-group">
+              <label htmlFor="resume-file" className="upload-area">
+                <div className="upload-icon">
+                  <Upload size={28} strokeWidth={2} />
+                </div>
+                <h3>Upload your Resume</h3>
+                <p>
+                  {resume
+                    ? resume.name
+                    : "Drag & drop your PDF or DOCX here, or click to browse"}
+                </p>
+                <span className="browse-btn">Choose File</span>
+              </label>
+
               <input
-                type="file"
                 id="resume-file"
+                type="file"
+                accept=".pdf,.docx"
                 onChange={handleResume}
                 required
-                accept='.pdf,.docx'
+                hidden
               />
-
             </div>
-            <div className='input-group'>
+            <div className="input-group">
               <label> Job Description</label>
               <textarea
                 id="job-description"
-                placeholder='Enter Job Description...'
+                placeholder="Enter Job Description..."
                 required
                 onChange={handleJobDescription}
-
               />
             </div>
-            <button type="submit" disabled={disable} className='submit-btn'>
-              Upload
+
+            <button type="submit" disabled={disable} className="submit-btn">
+              Upload & Analyze <ArrowRight size={24} className="arrow-icon" />
             </button>
           </div>
-
-
         </form>
       </div>
     </>

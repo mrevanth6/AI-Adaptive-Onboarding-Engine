@@ -22,23 +22,28 @@ function SavedRoadMaps() {
             </thead>
 
             <tbody>
-              {savedRoadmaps.map((el, index) => (
-                <tr key={index}>
-                  <td>{el.role_title}</td>
-                  <td>{el.roadmap.gap_analysis.readiness_score}</td>
-                  <td>{new Date(el.createdAt).toLocaleDateString()}</td>
-                  <td>
-                    <button
-                      className="view-btn"
-                      onClick={() =>
-                        navigate("/roadmap", { state: el.roadmap })
-                      }
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {savedRoadmaps.map(
+                (el, index) => (
+                  console.log(index, el),
+                  (
+                    <tr key={index}>
+                      <td>{el.role_title}</td>
+                      <td>{el.roadmap.gap_analysis.readiness_score}</td>
+                      <td>{new Date(el.createdAt).toLocaleDateString()}</td>
+                      <td>
+                        <button
+                          className="view-btn"
+                          onClick={() =>
+                            navigate("/roadmap", { state: el.roadmap })
+                          }
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                ),
+              )}
             </tbody>
           </table>
         </div>
