@@ -37,5 +37,16 @@ const resumeUpload = async (req, res) => {
     res.status(err.status || 500).json({ error: err.message });
   }
 };
+const getSavedRoadmaps = async (req, res) => {
+  try {
+    // Find the user by ID from the request (assuming you have user authentication and the user ID is available in req.user)
+    const user = await User.findById(req.user.userId);
+    // Send the user's savedRoadmaps back to the frontend
+    res.status(200).json({ savedRoadmaps: user.savedRoadmaps });
+  } catch (err) {
+    console.error(err);
+    res.status(err.status || 500).json({ error: err.message });
+  }
+};
 
-module.exports = { resumeUpload };
+module.exports = { resumeUpload, getSavedRoadmaps };
