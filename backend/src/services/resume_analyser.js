@@ -21,14 +21,30 @@ Role:
 ${JSON.stringify(roleCompetencyMap)}
 
 Rules:
-
 - Compare required skills against candidate skills.
-- Skills meeting or exceeding required proficiency → proficient.
-- One level below → partial.
-- Missing → missing.
+- Skills meeting or exceeding the required proficiency → proficient.
+- One proficiency level below → partial.
+- Missing entirely → missing.
 - Infer reasonable skills from project evidence.
-- Proficiency order:
-  beginner < intermediate < advanced
+- Return ONLY the skill names.
+- Do NOT include proficiency, explanations, confidence, reasoning, or any additional fields.
+- Each category must be an array of strings.
+
+Output format:
+
+{
+  "proficient": [
+    "React",
+    "Node.js"
+  ],
+  "partial": [
+    "MongoDB"
+  ],
+  "missing": [
+    "Docker",
+    "Kubernetes"
+  ]
+}
 
 Compute:
 
@@ -69,17 +85,6 @@ Return:
 `;
 }
 async function generateRoadmap(candidateProfile, roleCompetencyMap) {
-  //   const model = genAI.getGenerativeModel({
-  //     model: "gemini-2.5-flash",
-  //     generationConfig: {
-  //       temperature: 0.1, // Low temperature = consistent, factual output
-  //       topP: 0.8,
-  //       maxOutputTokens: 8192,
-  //       thinkingConfig: {
-  //         thinkingBudget: 0, // disable thinking — all tokens go to output JSON
-  //       },
-  //     },
-  //   });
   const prompt = buildRoadmapPrompt(
     candidateProfile,
     roleCompetencyMap,
@@ -87,7 +92,6 @@ async function generateRoadmap(candidateProfile, roleCompetencyMap) {
   );
   let raw;
   try {
-    console.time("NVIDIA NIM API call");
     const completion = await client.chat.completions.create({
       model: "meta/llama-3.1-70b-instruct", // or "meta/llama-3.1-70b-instruct"
       messages: [
@@ -100,26 +104,15 @@ async function generateRoadmap(candidateProfile, roleCompetencyMap) {
       top_p: 0.8,
       max_tokens: 3192,
     });
-    // const result = await model.generateContent(prompt);
 
-    // const finishReason = result.response.candidates?.[0]?.finishReason;
-    // if (finishReason === "MAX_TOKENS") {
-    //   throw new Error(
-    //     "Gemini response was truncated (MAX_TOKENS). Increase maxOutputTokens or reduce module count in the prompt.",
-    //   );
-    // }
-
-    // raw = result.response.text();
     const finishReason = completion.choices[0]?.finish_reason;
     if (finishReason === "length") {
       throw new Error("Response truncated — increase max_tokens.");
     }
-    console.timeEnd("NVIDIA NIM API call");
-    console.log("Tokens 3:", completion.usage);
+
     raw = completion.choices[0]?.message?.content;
     if (!raw) throw new Error("Empty response from NVIDIA NIM.");
   } catch (err) {
-    // throw new Error(`Gemini API error during resume analysis: ${err.message}`);
     throw new Error(`NVIDIA NIM API error: ${err.message}`);
   }
   const cleaned = raw
