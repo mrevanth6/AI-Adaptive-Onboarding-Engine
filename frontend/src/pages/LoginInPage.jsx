@@ -146,9 +146,9 @@ function LoginInPage() {
         });
         console.log(response);
         if (response.status === 200) {
-          const { token, savedRoadmaps } = response.data;
+          const { token } = response.data;
           localStorage.setItem("token", token);
-          localStorage.setItem("savedRoadmaps", JSON.stringify(savedRoadmaps));
+
           toast.success("Login successful!");
           navigate("/analyzer");
         }

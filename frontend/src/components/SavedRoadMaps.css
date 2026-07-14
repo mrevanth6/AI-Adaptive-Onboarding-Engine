@@ -79,3 +79,21 @@
 
     transition: 0.2s;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    width: 100%;
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    overflow-x: auto;
+    margin-top: 20px;
+}
