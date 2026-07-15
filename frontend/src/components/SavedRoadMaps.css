@@ -97,3 +97,11 @@
     overflow-x: auto;
     margin-top: 20px;
 }
+
+.empty-page {
+    text-align: center;
+    font-size: 24px;
+    color: black;
+    font-weight: 500;
+    margin-top: 100px;
+}

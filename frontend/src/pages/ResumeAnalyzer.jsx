@@ -6,14 +6,17 @@ const API_URL = import.meta.env.VITE_API_URL;
 import { toast } from "react-toastify";
 import { ArrowRight } from "lucide-react";
 import { Upload } from "lucide-react";
+import { BeatLoader } from "react-spinners";
 function ResumeAnalyser() {
   const navigate = useNavigate();
   const [resume, setResume] = useState();
   const [jobDescription, setjobDescription] = useState("");
   const [disable, setDisable] = useState(false);
+  const [loading, setLoading] = useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
     setDisable(true);
+    setLoading(true);
     const formData = new FormData();
     formData.append("file", resume);
     formData.append("jobDescription", jobDescription);
@@ -30,7 +33,7 @@ function ResumeAnalyser() {
           },
         },
       );
-      console.log(response);
+
       // If Invalid token, redirect to login page
       if (response.status === 401) {
         toast.error("Invalid token. Please login again.");
@@ -41,16 +44,6 @@ function ResumeAnalyser() {
       if (response.status === 200) {
         const { message, data } = response.data;
         toast.success(message);
-        // Save the roadmap to localStorage
-        localStorage.setItem("roadmap", JSON.stringify(data.roadmap));
-        // Save the the roadmap to previously saved roadmaps in localStorage
-        const savedRoadmaps =
-          JSON.parse(localStorage.getItem("savedRoadmaps")) || [];
-        savedRoadmaps.push(data);
-        // Save the updated savedRoadmaps to localStorage
-        localStorage.setItem("savedRoadmaps", JSON.stringify(savedRoadmaps));
-        // Navigate to the roadmap page and pass the roadmap as state
-        console.log("Navigating to roadmap page with roadmap:", data.roadmap);
         navigate("/roadmap", { state: data.roadmap });
       } else {
         toast.error("Error uploading resume. Please try again.");
@@ -63,6 +56,7 @@ function ResumeAnalyser() {
       );
     } finally {
       setDisable(false);
+      setLoading(false);
     }
   }
   const handleResume = (e) => {
@@ -75,6 +69,11 @@ function ResumeAnalyser() {
   };
   return (
     <>
+      {loading && (
+        <div className="loading-overlay">
+          <BeatLoader color="black" size={10} />
+        </div>
+      )}
       <div className="resume-analyzer">
         <form onSubmit={handleSubmit}>
           <div className="resume-card">

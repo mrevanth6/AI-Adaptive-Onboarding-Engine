@@ -139,7 +139,6 @@ function LoginInPage() {
 
   const signInWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse.access_token);
       try {
         const response = await axios.post(`${API_URL}/api/auth/google-login`, {
           access_token: tokenResponse.access_token,
