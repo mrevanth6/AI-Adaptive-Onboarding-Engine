@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
+import { BeatLoader } from "react-spinners";
 const API_URL = import.meta.env.VITE_API_URL;
 function LoginInPage() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ function LoginInPage() {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function onEmailChange(e) {
     setEmail(e.target.value);
   }
@@ -109,6 +112,7 @@ function LoginInPage() {
       return;
     }
     try {
+      setLoading(true);
       const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
@@ -134,12 +138,15 @@ function LoginInPage() {
         error.response?.data?.message ||
           "An error occurred during login. Please try again.",
       );
+    } finally {
+      setLoading(false);
     }
   }
 
   const signInWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
+        setLoading(true);
         const response = await axios.post(`${API_URL}/api/auth/google-login`, {
           access_token: tokenResponse.access_token,
         });
@@ -156,107 +163,119 @@ function LoginInPage() {
           error.response?.data?.message ||
             "An error occurred during login. Please try again.",
         );
+      } finally {
+        setLoading(false);
       }
     },
     onError: () => {
       toast.error("Google login failed. Please try again.");
+      setLoading(false);
     },
   });
   return (
-    <div className="login-page">
-      <div className="login-page-image">
-        <h1>Welcome Back!</h1>
-        <p>To keep connected with us please login with your personal info</p>
-      </div>
+    <>
+      {loading && (
+        <div className="loading-overlay">
+          <BeatLoader color="#4F46E5" size={10} />
+        </div>
+      )}
+      <div className="login-page">
+        <div className="login-page-image">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+        </div>
 
-      {authView === "login" && (
-        <div className="login-container">
-          <div className="login-container-header">
-            <h2>Login</h2>
-            <p>Glad to see you again!</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="login-form" noValidate>
-            <div className="form-group">
-              <label htmlFor="email" className="required">
-                Email Address
-              </label>
-
-              <div
-                className={`input-wrapper ${!isemailValid ? "error-input" : ""}`}
-              >
-                <Mail size={18} className="input-icon" />
-
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  required
-                  onChange={onEmailChange}
-                />
-              </div>
+        {authView === "login" && (
+          <div className="login-container">
+            <div className="login-container-header">
+              <h2>Login</h2>
+              <p>Glad to see you again!</p>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="password" className="required">
-                Password
-              </label>
+            <form onSubmit={handleSubmit} className="login-form" noValidate>
+              <div className="form-group">
+                <label htmlFor="email" className="required">
+                  Email Address
+                </label>
 
-              <div className="input-wrapper">
-                <Lock size={18} className="input-icon" />
-
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  required
-                  onChange={handlePasswordChange}
-                />
-                <span
-                  className="password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
+                <div
+                  className={`input-wrapper ${!isemailValid ? "error-input" : ""}`}
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </span>
+                  <Mail size={18} className="input-icon" />
+
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    onChange={onEmailChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="form-options">
-              <label>
-                <input type="checkbox" />
-                Remember me
-              </label>
 
-              <a
-                href="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setAuthView("forgot-password");
-                }}
-              >
-                Forgot Password?
-              </a>
-            </div>
+              <div className="form-group">
+                <label htmlFor="password" className="required">
+                  Password
+                </label>
 
-            <button type="submit" className="login-btn">
-              Login
-            </button>
-          </form>
-          <div className="footer">
-            <div className="divider-container">
-              <hr className="divider" />
-              <span className="divider-text">Or Continue with</span>
-              <hr className="divider" />
-            </div>
-            {/* <p className="divider">Or Continue with</p> */}
-            <div className="social-login">
-              <button className="social-btn" onClick={() => signInWithGoogle()}>
-                <FcGoogle size={20} />
-                Google
+                <div className="input-wrapper">
+                  <Lock size={18} className="input-icon" />
+
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                    onChange={handlePasswordChange}
+                  />
+                  <span
+                    className="password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </span>
+                </div>
+              </div>
+              <div className="form-options">
+                <label>
+                  <input type="checkbox" />
+                  Remember me
+                </label>
+
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAuthView("forgot-password");
+                  }}
+                >
+                  Forgot Password?
+                </a>
+              </div>
+
+              <button type="submit" className="login-btn" disabled={loading}>
+                Login
               </button>
+            </form>
+            <div className="footer">
+              <div className="divider-container">
+                <hr className="divider" />
+                <span className="divider-text">Or Continue with</span>
+                <hr className="divider" />
+              </div>
+              {/* <p className="divider">Or Continue with</p> */}
+              <div className="social-login">
+                <button
+                  className="social-btn"
+                  onClick={() => signInWithGoogle()}
+                >
+                  <FcGoogle size={20} />
+                  Google
+                </button>
 
-              {/* <button className="social-btn">
+                {/* <button className="social-btn">
                             <FaGithub size={20} />
                             GitHub
                         </button>
@@ -265,146 +284,147 @@ function LoginInPage() {
                             <FaLinkedin size={20} />
                             LinkedIn
                         </button> */}
-            </div>
+              </div>
 
-            <div className="signup-link">
-              <p>Don't have an account?</p>
-              <Link to="/signup" className="signup-link-text">
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-      {authView === "forgot-password" && (
-        <div className="forgot-password-container">
-          <div className="forgot-password-header">
-            <h2>Forgot Password</h2>
-            <p>Please enter your email address to reset your password.</p>
-          </div>
-          <form
-            className="forgot-password-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="email-verification" className="required">
-                Email Address
-              </label>
-
-              <div className="input-wrapper">
-                <Mail size={18} className="input-icon" />
-
-                <input
-                  type="email"
-                  id="email-verification"
-                  name="email-verification"
-                  placeholder="Enter your email"
-                  required
-                  onChange={onEmailChange}
-                />
+              <div className="signup-link">
+                <p>Don't have an account?</p>
+                <Link to="/signup" className="signup-link-text">
+                  Sign Up
+                </Link>
               </div>
             </div>
-            <button type="submit" className="send-otp-btn" onClick={sendOtp}>
-              Send OTP
-            </button>
-          </form>
-        </div>
-      )}
-      {authView === "otp-verification" && (
-        <div className="otp-verification-container">
-          <div className="otp-verification-header">
-            <h2>OTP Verification</h2>
-            <p>Please enter the OTP sent to your email address.</p>
           </div>
-          <form
-            className="otp-verification-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="otp" className="required">
-                OTP
-              </label>
-              <div className="input-wrapper">
-                <Lock size={18} className="input-icon" />
-                <input
-                  type="text"
-                  id="otp"
-                  name="otp"
-                  placeholder="Enter OTP"
-                  required
-                  onChange={onOtpChange}
-                />
-              </div>
+        )}
+        {authView === "forgot-password" && (
+          <div className="forgot-password-container">
+            <div className="forgot-password-header">
+              <h2>Forgot Password</h2>
+              <p>Please enter your email address to reset your password.</p>
             </div>
-            <button
-              type="submit"
-              className="verify-otp-btn"
-              onClick={verifyOtp}
+            <form
+              className="forgot-password-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
             >
-              Verify OTP
-            </button>
-          </form>
-        </div>
-      )}
-      {authView === "reset-password" && (
-        <div className="reset-password-container">
-          <div className="reset-password-header">
-            <h2>Reset Password</h2>
-            <p>Please enter your new password.</p>
+              <div className="form-group">
+                <label htmlFor="email-verification" className="required">
+                  Email Address
+                </label>
+
+                <div className="input-wrapper">
+                  <Mail size={18} className="input-icon" />
+
+                  <input
+                    type="email"
+                    id="email-verification"
+                    name="email-verification"
+                    placeholder="Enter your email"
+                    required
+                    onChange={onEmailChange}
+                  />
+                </div>
+              </div>
+              <button type="submit" className="send-otp-btn" onClick={sendOtp}>
+                Send OTP
+              </button>
+            </form>
           </div>
-          <form
-            className="reset-password-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="new-password" className="required">
-                New Password
-              </label>
-              <div className="input-wrapper">
-                <Lock size={18} className="input-icon" />
-                <input
-                  type="password"
-                  id="new-password"
-                  name="new-password"
-                  placeholder="Enter your new password"
-                  required
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
-              </div>
+        )}
+        {authView === "otp-verification" && (
+          <div className="otp-verification-container">
+            <div className="otp-verification-header">
+              <h2>OTP Verification</h2>
+              <p>Please enter the OTP sent to your email address.</p>
             </div>
-            <div className="form-group">
-              <label htmlFor="confirm-new-password" className="required">
-                Confirm New Password
-              </label>
-              <div className="input-wrapper">
-                <Lock size={18} className="input-icon" />
-                <input
-                  type="password"
-                  id="confirm-new-password"
-                  name="confirm-new-password"
-                  placeholder="Confirm your new password"
-                  required
-                  onChange={(e) => setConfirmNewPassword(e.target.value)}
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="reset-password-btn"
-              onClick={resetPassword}
+            <form
+              className="otp-verification-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
             >
-              Reset Password
-            </button>
-          </form>
-        </div>
-      )}
-    </div>
+              <div className="form-group">
+                <label htmlFor="otp" className="required">
+                  OTP
+                </label>
+                <div className="input-wrapper">
+                  <Lock size={18} className="input-icon" />
+                  <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    placeholder="Enter OTP"
+                    required
+                    onChange={onOtpChange}
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="verify-otp-btn"
+                onClick={verifyOtp}
+              >
+                Verify OTP
+              </button>
+            </form>
+          </div>
+        )}
+        {authView === "reset-password" && (
+          <div className="reset-password-container">
+            <div className="reset-password-header">
+              <h2>Reset Password</h2>
+              <p>Please enter your new password.</p>
+            </div>
+            <form
+              className="reset-password-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <div className="form-group">
+                <label htmlFor="new-password" className="required">
+                  New Password
+                </label>
+                <div className="input-wrapper">
+                  <Lock size={18} className="input-icon" />
+                  <input
+                    type="password"
+                    id="new-password"
+                    name="new-password"
+                    placeholder="Enter your new password"
+                    required
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirm-new-password" className="required">
+                  Confirm New Password
+                </label>
+                <div className="input-wrapper">
+                  <Lock size={18} className="input-icon" />
+                  <input
+                    type="password"
+                    id="confirm-new-password"
+                    name="confirm-new-password"
+                    placeholder="Confirm your new password"
+                    required
+                    onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="reset-password-btn"
+                onClick={resetPassword}
+              >
+                Reset Password
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

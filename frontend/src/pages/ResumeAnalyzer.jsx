@@ -71,7 +71,7 @@ function ResumeAnalyser() {
     <>
       {loading && (
         <div className="loading-overlay">
-          <BeatLoader color="black" size={10} />
+          <BeatLoader color="#4F46E5" size={10} />
         </div>
       )}
       <div className="resume-analyzer">
@@ -83,7 +83,13 @@ function ResumeAnalyser() {
                 <div className="upload-icon">
                   <Upload size={28} strokeWidth={2} />
                 </div>
-                <h3>Upload your Resume</h3>
+                <h3
+                  style={{
+                    color: "#0F172A",
+                  }}
+                >
+                  Upload your Resume
+                </h3>
                 <p>
                   {resume
                     ? resume.name

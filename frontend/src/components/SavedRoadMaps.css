@@ -2,17 +2,34 @@
     padding: 40px;
 
     min-height: 100vh;
+    background: #F8FAFC;
 }
 
 .saved-roadmaps h2 {
     font-size: 24px;
 
-    color: #111827;
+    color: #0F172A;
+    font-weight: 700;
 }
 
 .saved-roadmaps p {
     font-size: 16px;
     margin-top: 4px;
+    color: #64748B;
+}
+
+
+thead {
+    background: #F8FAFC;
+    border-bottom: 1px solid#E2E8F0;
+}
+
+th {
+    font-weight: 600;
+    color: #334155;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 16px;
 }
 
 .table-container {
@@ -21,9 +38,8 @@
     border-radius: 16px;
 
     padding: 20px;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, .06);
     overflow-x: auto;
     margin-top: 20px;
 }
@@ -61,6 +77,11 @@
 
 .roadmap-table tbody tr {
     transition: 0.2s;
+    background: white;
+}
+
+.roadmap-table tbody tr:hover {
+    background: #EEF2FF;
 }
 
 
@@ -68,9 +89,8 @@
 .view-btn {
     border: none;
 
-    background-color: white;
-    color: blue;
-
+    background-color: #EEF2FF;
+    color: #4F46E5;
     padding: 8px 16px;
 
     border-radius: 8px;
@@ -78,6 +98,11 @@
     cursor: pointer;
 
     transition: 0.2s;
+}
+
+.view-btn:hover {
+    background-color: #4F46E5;
+    color: white;
 }
 
 .loading {

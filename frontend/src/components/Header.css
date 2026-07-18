@@ -3,11 +3,14 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 25px;
-    background-color: white;
+    background-color: #FFFFFF;
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, .05);
 }
+
 
 
 

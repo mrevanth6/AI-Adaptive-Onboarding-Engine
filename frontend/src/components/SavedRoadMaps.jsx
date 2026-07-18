@@ -9,6 +9,11 @@ function SavedRoadMaps() {
   const navigate = useNavigate();
   const [savedRoadmaps, setSavedRoadmaps] = useState([]);
   const [loading, setLoading] = useState(true);
+  const getColor = (score) => {
+    if (score < 40) return "#EF4444";
+    if (score < 70) return "#F59E0B";
+    return "#22C55E";
+  };
   const fetchSavedRoadmaps = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -38,7 +43,7 @@ function SavedRoadMaps() {
       <p>This is where your saved road maps will appear.</p>
       {loading ? (
         <div className="loading">
-          <BeatLoader color="black" size={10} />
+          <BeatLoader color="#4F46E5" size={10} />
         </div>
       ) : savedRoadmaps.length === 0 ? (
         <p>No saved road maps found.</p>
@@ -57,9 +62,30 @@ function SavedRoadMaps() {
             <tbody>
               {savedRoadmaps.map((el, index) => (
                 <tr key={index}>
-                  <td>{el.role_title}</td>
-                  <td>{el.roadmap.gap_analysis.readiness_score}</td>
-                  <td>{new Date(el.createdAt).toLocaleDateString()}</td>
+                  <td
+                    style={{
+                      color: "#0F172A",
+                      fontWeight: "600",
+                    }}
+                  >
+                    {el.role_title}
+                  </td>
+                  <td
+                    style={{
+                      color: getColor(el.roadmap.gap_analysis.readiness_score),
+                      fontWeight: "300",
+                      fontSize: "1rem",
+                    }}
+                  >
+                    {el.roadmap.gap_analysis.readiness_score}
+                  </td>
+                  <td
+                    style={{
+                      color: "#64748B",
+                    }}
+                  >
+                    {new Date(el.createdAt).toLocaleDateString()}
+                  </td>
                   <td>
                     <button
                       className="view-btn"
