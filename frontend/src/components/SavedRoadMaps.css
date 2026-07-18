@@ -134,6 +134,8 @@ th {
 @media (max-width: 320px) {
     .saved-roadmaps {
         padding: 20px;
+        width: 100%;
+        margin: 2px;
     }
 
     .roadmap-table th,
