@@ -131,7 +131,7 @@ th {
     margin-top: 100px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 320px) {
     .saved-roadmaps {
         padding: 20px;
     }
