@@ -7,22 +7,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 0 0 120px;
     width: 120px;
+    min-width: 120px;
+    flex-shrink: 0;
     margin: 24px 20px 0px 20px;
     background: white;
 }
 
 
 .week-number {
-
-    font-size: 14px;
+    font-size: px;
     font-weight: 600;
     color: #1F2937;
-    background: #E5E7EB;
+    background: #F4FFF7;
     padding: 8px;
     text-align: center;
-    border-radius: 8px;
+
+    border-radius: 50%;
     width: 40px;
+    height: 40px;
     margin-bottom: 10px;
 }
 
@@ -30,10 +34,13 @@
 .week-range {
     text-align: center;
     padding: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: #374151;
     margin: 0;
+    white-space: nowrap;
+    line-height: 1.2;
+    width: max-content;
 }
 
 .week-meta {
@@ -42,23 +49,40 @@
     align-items: center;
     gap: 4px;
     margin-top: 2px;
+    width: 100%;
 }
 
 .week-duration {
-    text-align: center;
-    font-size: 14px;
+    display: block;
+    width: 100%;
+    margin: 2px 0 0;
+    font-size: 16px;
     font-weight: 500;
-    color: #6B7280;
-    line-height: 1.4;
-    margin: 0;
-
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    color: #6b7280;
+    transform: translateY(-1px);
 }
 
 .roadmap-card {
     margin: 20px 20px 0px 0px;
     border-radius: 12px;
-    background: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.color-0 {
+    background: #F7F4FF;
+    border: 1px solid #E6DDFF;
+}
+
+.color-1 {
+    background: #F4F9FF;
+    border: 1px solid #D8E9FF;
+}
+
+.color-2 {
+    background: #F4FFF7;
+    border: 1px solid #D8F5E2;
 }
 
 .roadmap-card:hover {
@@ -147,18 +171,29 @@
 }
 
 .expand-btn {
-    background: none;
+    background: transparent;
     border: none;
-    color: #3B82F6;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    padding: 2px;
+    padding: 4px;
+
+    align-self: center;
 }
 
-.expand-btn:hover {
-    color: #1E40AF;
+.btn-color-0 {
+    color: #7C3AED;
 }
+
+.btn-color-1 {
+    color: #2563EB;
+}
+
+.btn-color-2 {
+    color: #059669;
+}
+
+
 
 .divider {
     width: 1px;
@@ -166,7 +201,18 @@
 
 }
 
+.resource-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+}
 
 @media (max-width: 768px) {
 
@@ -205,6 +251,7 @@
         font-size: 14px;
         font-weight: 600;
         white-space: nowrap;
+        width: max-content;
     }
 
     .week-meta {
