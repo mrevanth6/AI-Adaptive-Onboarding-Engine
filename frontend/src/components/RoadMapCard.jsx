@@ -2,6 +2,7 @@ import "./RoadMapCard.css";
 import { useState } from "react";
 import ResourceDialog from "./ResourceDialog";
 function RoadMapCard({ module, index }) {
+  console.log(module);
   const [DialogOpen, setDialogOpen] = useState(false);
   const getTypeClass = (type) => {
     return type === "full-module" ? "full-module" : "fast-track";
@@ -55,7 +56,15 @@ function RoadMapCard({ module, index }) {
                 View Resources
               </button>
               {DialogOpen && (
-                <ResourceDialog onClose={() => setDialogOpen(false)} />
+                <ResourceDialog
+                  topic={module.topic}
+                  resources={
+                    module.resources
+                      ? module.resources
+                      : module.learning_resources
+                  }
+                  onClose={() => setDialogOpen(false)}
+                />
               )}
             </div>
           </div>
