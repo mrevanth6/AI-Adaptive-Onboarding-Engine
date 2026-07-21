@@ -1,48 +1,38 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const OpenAI = require("openai");
+const Groq = require("groq-sdk");
 require("dotenv").config();
-
-const client = new OpenAI({
-  apiKey: process.env.NVIDIA_API_KEY,
-  baseURL: "https://integrate.api.nvidia.com/v1",
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY, // from console.groq.com
 });
 function buildResumeAnalysisPrompt(resumeText) {
-  return `
-You are an expert technical recruiter.
+  return `You are a technical recruiter and skills analyst. Analyze the resume below and extract a structured skill profile.
 
-Analyze the resume and return a structured skill profile.
+EXTRACTION RULES:
+- Extract BOTH explicit skills (listed in Skills section) and implicit skills (inferred from projects and responsibilities)
+- Infer skills from project descriptions (e.g. "Built REST API" → infer REST, HTTP, API Design)
+- Assign proficiency based on evidence:
+  - "beginner" → mentioned once, no context, or "familiar with / exposure to"
+  - "intermediate" → used in projects or internships with described outcomes
+  - "advanced" → led projects using it, multiple instances, or described as expert
+- Normalize skill names (e.g. "ReactJS" → "React", "Postgres" → "PostgreSQL")
+- Only extract skills with actual evidence. Do not hallucinate.
 
-Tasks:
-- Extract skills from the Skills section, projects, experience, education, and certifications.
-- Infer implicit technical skills from project descriptions (e.g. REST API → REST, HTTP, API Design).
-- Normalize skill names (ReactJS → React, Postgres → PostgreSQL).
-- Assign proficiency:
-  - beginner: mentioned with little evidence
-  - intermediate: used in projects/work
-  - advanced: extensive or repeated professional use
+SPEED RULES:
+- Do not explain your reasoning
+- Return ONLY valid JSON, no markdown, no backticks, no preamble
 
-Group skills into:
-- programming_languages
-- frameworks_and_libraries
-- databases
-- cloud_and_devops
-- tools_and_platforms
-- concepts_and_methodologies
-- soft_skills
-
-Rules:
-- Only include skills supported by evidence.
-- Return ONLY valid JSON.
-
-Resume:
+RESUME:
+---
 ${resumeText}
+---
 
-Return:
+Return exactly this JSON:
 {
-  "candidate_name": null,
-  "total_experience_years": null,
+  "candidate_name": "string or null",
+  "total_experience_years": number or null,
   "skills": {
-    "programming_languages": [],
+    "programming_languages": [
+      { "name": "string", "proficiency": "beginner|intermediate|advanced", "evidence": "one short phrase" }
+    ],
     "frameworks_and_libraries": [],
     "databases": [],
     "cloud_and_devops": [],
@@ -50,10 +40,9 @@ Return:
     "concepts_and_methodologies": [],
     "soft_skills": []
   },
-  "top_skills": [],
-  "experience_summary": ""
-}
-`;
+  "top_skills": ["5 strongest skills based on evidence"],
+  "experience_summary": "2 sentence summary of candidate background"
+}`;
 }
 
 function analyseJobDescription(input) {
@@ -94,31 +83,29 @@ async function analyseResume(resumeText) {
     throw new Error("Resume text is too short or empty to analyse.");
   }
 
-  const prompt = buildResumeAnalysisPrompt(resumeText);
-
   let raw;
   try {
-    const completion = await client.chat.completions.create({
-      model: "meta/llama-3.1-70b-instruct", // or "meta/llama-3.1-70b-instruct"
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
       messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
+        { role: "user", content: buildResumeAnalysisPrompt(resumeText) },
       ],
       temperature: 0.1,
+      max_completion_tokens: 4096,
       top_p: 0.8,
-      max_tokens: 2048,
+      stream: false, // ← must be false for JSON parsing
+      stop: null,
     });
+
     const finishReason = completion.choices[0]?.finish_reason;
 
     if (finishReason === "length") {
       throw new Error("Response truncated — increase max_tokens.");
     }
     raw = completion.choices[0]?.message?.content;
-    if (!raw) throw new Error("Empty response from NVIDIA NIM.");
+    if (!raw) throw new Error("Empty response from Groq.");
   } catch (err) {
-    throw new Error(`NVIDIA NIM API error: ${err.message}`);
+    throw new Error(`GROQ API ERROR: ${err.message}`);
   }
 
   const cleaned = raw
@@ -127,41 +114,32 @@ async function analyseResume(resumeText) {
     .trim();
 
   const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-
   if (!jsonMatch) {
-    throw new Error("No JSON object found in response.");
+    throw new Error("No JSON found in response. Raw: " + cleaned.slice(0, 300));
   }
-
-  let parsed;
 
   try {
-    parsed = JSON.parse(jsonMatch[0]);
-  } catch (err) {
-    console.error("Raw Response:", cleaned);
-    throw new Error("Invalid JSON returned by the model.");
+    return JSON.parse(jsonMatch[0]);
+  } catch {
+    throw new Error("Failed to parse JSON. Raw: " + cleaned.slice(0, 300));
   }
-
-  return parsed;
 }
 async function analyseJD(jobDescription) {
   if (!jobDescription) {
     throw new Error("Provide the Job Description");
   }
-
-  const prompt = analyseJobDescription(jobDescription);
   let raw;
   try {
-    const completion = await client.chat.completions.create({
-      model: "meta/llama-3.1-70b-instruct", // or "meta/llama-3.1-70b-instruct"
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
       messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
+        { role: "user", content: analyseJobDescription(jobDescription) },
       ],
       temperature: 0.1,
+      max_completion_tokens: 2048, // small output, fast response
       top_p: 0.8,
-      max_tokens: 2048,
+      stream: false,
+      stop: null,
     });
     const finishReason = completion.choices[0]?.finish_reason;
 
@@ -169,25 +147,25 @@ async function analyseJD(jobDescription) {
       throw new Error("Response truncated — increase max_tokens.");
     }
     raw = completion.choices[0]?.message?.content;
-    if (!raw) throw new Error("Empty response from NVIDIA NIM.");
+    if (!raw) throw new Error("Empty response from GROQ.");
   } catch (err) {
-    throw new Error(`NVIDIA NIM API error: ${err.message}`);
+    throw new Error(`GROQ  API error: ${err.message}`);
   }
   const cleaned = raw
     .replace(/```json\s*/gi, "")
     .replace(/```\s*/g, "")
     .trim();
 
-  let parsed;
-  try {
-    parsed = JSON.parse(cleaned);
-  } catch {
-    throw new Error(
-      "Failed to parse structured output from AI. Raw response: " + cleaned,
-    );
+  const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    throw new Error("No JSON found in response. Raw: " + cleaned.slice(0, 300));
   }
 
-  return parsed;
+  try {
+    return JSON.parse(jsonMatch[0]);
+  } catch {
+    throw new Error("Failed to parse JSON. Raw: " + cleaned.slice(0, 300));
+  }
 }
 
 module.exports = { analyseResume, analyseJD };
